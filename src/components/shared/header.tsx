@@ -1,5 +1,6 @@
 'use client';
 
+import { Menu } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 
@@ -54,7 +55,7 @@ export const Header: React.FC = () => {
         </div>
 
         <button className={styles.hamburger} onClick={toggleMenu}>
-          ☰
+          <Menu />
         </button>
       </div>
     </header>
