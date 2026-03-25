@@ -8,7 +8,7 @@ export const Hero: React.FC = () => {
       <div className={styles.heroContainer}>
         <div className={styles.heroImageCard}>
           <Image
-            src="/hero.png"
+            src="/images/hero.png"
             alt="hero"
             fill
             priority
@@ -33,10 +33,10 @@ export const Hero: React.FC = () => {
         <h2 className={styles.aboutTitle}>ПРО НАС</h2>
         <p className={styles.aboutText}>
           Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry&apos;s standard dummy text ever
-          since the 1500s, Lorem Ipsum is simply dummy text of the printing and
-          typesetting industry. Lorem Ipsum has been the industry&apos;s standard
-          dummy text ever since the 1500s
+          industry. Lorem Ipsum has been the industry&apos;s standard dummy text
+          ever since the 1500s, Lorem Ipsum is simply dummy text of the printing
+          and typesetting industry. Lorem Ipsum has been the industry&apos;s
+          standard dummy text ever since the 1500s
         </p>
       </div>
     </section>

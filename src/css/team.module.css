@@ -1,0 +1,248 @@
+.section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 80px 24px;
+  background-color: #fafafa;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  background-color: #cdd5ff;
+  z-index: 0;
+}
+
+.circleLargeMiddle {
+  width: 400px;
+  height: 400px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.circleMediumLeft {
+  width: 250px;
+  height: 250px;
+  bottom: 20%;
+  left: 100px;
+}
+
+.circleSmallLeft {
+  width: 150px;
+  height: 150px;
+  bottom: 7%;
+  left: 20%;
+}
+
+.circleTopRight {
+  width: 200px;
+  height: 200px;
+  top: 15%;
+  right: 20%;
+}
+
+.circleLargeRight {
+  width: 350px;
+  height: 350px;
+  bottom: 0%;
+  right: 300px;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1469px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 30px;
+  width: 100%;
+}
+
+.title {
+  font-size: 96px;
+  font-weight: 300;
+  color: #0026ff;
+  margin: 0;
+  line-height: 1;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+}
+
+.detailsButton {
+  background-color: #eef1ff;
+  color: #0026ff;
+  border: 1px solid #0026ff;
+  border-radius: 20px;
+  padding: 8px 32px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+}
+
+.detailsButton:hover {
+  background-color: #0026ff;
+  color: #ffffff;
+}
+
+.carouselWrapper {
+  width: 100%;
+}
+
+.carouselMain {
+  width: 100%;
+}
+
+.carouselContent {
+  display: flex;
+}
+
+.carouselItem {
+  flex: 0 0 100%;
+  min-width: 0;
+  padding: 4px;
+}
+
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  width: 100%;
+
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.cardContainer {
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+.teamCard {
+  position: relative;
+  aspect-ratio: 1 / 0.9;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.image {
+  border-radius: 16px;
+  object-fit: cover;
+  z-index: 1;
+  width: 100%;
+}
+
+.gradientOverlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60%;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  z-index: 2;
+}
+
+.cardContentOverlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 24px;
+  z-index: 3;
+  color: #ffffff;
+  text-align: center;
+  box-sizing: border-box;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+}
+
+.memberName {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 4px 0;
+}
+
+.memberRole {
+  font-size: 14px;
+  margin: 0;
+  opacity: 0.9;
+}
+
+.controlsWrapper {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 12px;
+  position: relative;
+}
+
+.carouselControl {
+  width: 100%;
+  max-width: 40px;
+  position: static;
+  transform: none;
+  background: transparent;
+  border: none;
+  color: #0026ff;
+}
+
+.carouselControl:hover {
+  background: transparent;
+  color: #0026ff;
+}
+
+@media (max-width: 1024px) {
+  .title {
+    font-size: 72px;
+  }
+  .gridContainer {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 48px;
+  }
+  .gridContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .memberName {
+    font-size: 16px;
+  }
+  .memberRole {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .gridContainer {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,195 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 80px 24px;
+  background-color: #fafafa;
+  font-family: system-ui, -apple-system, sans-serif;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 100%;
+  max-width: 1469px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 30px;
+  width: 100%;
+}
+
+.title {
+  font-size: 96px;
+  font-weight: 300;
+  color: #0026ff;
+  margin: 0;
+  line-height: 1;
+}
+
+.detailsButton {
+  background-color: transparent;
+  color: #0026ff;
+  border: 1px solid #0026ff;
+  border-radius: 20px;
+  padding: 8px 32px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.detailsButton:hover {
+  background-color: #0026ff;
+  color: #ffffff;
+}
+
+.sliderContainer {
+  background-color: #eef1ff;
+  border: 2px solid #0026ff;
+  border-radius: 16px;
+  padding: 32px 32px 24px 32px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card {
+  display: flex;
+  gap: 48px;
+  width: 100%;
+  padding-bottom: 32px;
+}
+
+.imageWrapper {
+  position: relative;
+  flex: 0 0 50%;
+  aspect-ratio: 16 / 10;
+  border-radius: 12px;
+  overflow: hidden;
+  transform: translateZ(0); 
+}
+
+.image {
+  object-fit: cover;
+}
+
+.contentWrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.textContent {
+  margin-bottom: 40px;
+}
+
+.eventTitle {
+  font-size: 40px;
+  font-weight: 700;
+  color: #0026ff;
+  margin: 0 0 12px 0;
+  line-height: 1.2;
+}
+
+.eventDate {
+  font-size: 24px;
+  font-weight: 500;
+  color: #1a1a1a;
+  margin: 0 0 24px 0;
+}
+
+.eventDescription {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333333;
+  margin: 0;
+  max-width: 600px;
+}
+
+.registerButton {
+  border: none;
+  border-radius: 8px;
+  padding: 14px 48px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  align-self: center;
+}
+
+.registerButton:hover {
+  background-color: #001ecc;
+}
+
+.controlsWrapper {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 12px;
+  position: relative;
+}
+
+.carouselControl {
+  width: 100%;
+  max-width: 40px;
+  position: static;
+  transform: none;
+  background: transparent;
+  border: none;
+  color: #0026ff;
+}
+
+.carouselControl:hover {
+  background: transparent;
+  color: #0026ff;
+  transform: scale(1.1);
+}
+
+@media (max-width: 1024px) {
+  .title {
+    font-size: 72px;
+  }
+  
+  .card {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .imageWrapper {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+
+  .eventTitle {
+    font-size: 32px;
+  }
+
+  .registerButton {
+    align-self: flex-start;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    gap: 16px;
+  }
+
+  .title {
+    font-size: 48px;
+  }
+
+  .sliderContainer {
+    padding: 24px 16px;
+  }
+  
+  .registerButton {
+    width: 100%;
+  }
+}

@@ -7,6 +7,8 @@ import type { Message } from '@/store/chatbot/chatbot.api';
 import styles from '@/css/chat-bot.module.css';
 import { useSendMessageMutation } from '@/store/chatbot/chatbot.api';
 
+import { Button } from '../ui/button';
+
 export const ChatBot: React.FC = () => {
   const [messages, setMessages] = React.useState<Message[]>([]);
   const [input, setInput] = React.useState('');
@@ -131,12 +133,12 @@ export const ChatBot: React.FC = () => {
               placeholder="Введіть ваше запитання..."
               className={styles.inputField}
             />
-            <button
+            <Button
               onClick={handleSendMessage}
               disabled={isLoading || !input.trim()}
               className={styles.sendButton}>
               Надіслати
-            </button>
+            </Button>
           </div>
         </div>
       </div>

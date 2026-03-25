@@ -2,6 +2,7 @@
 
 import { Menu } from 'lucide-react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
 import styles from '@/css/header.module.css';
@@ -10,6 +11,7 @@ import { Button } from '../ui/button';
 
 export const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const pathname = usePathname();
 
   const toggleMenu = (): void => {
     setIsMenuOpen(!isMenuOpen);
@@ -44,7 +46,10 @@ export const Header: React.FC = () => {
           className={`${styles.navWrapper} ${isMenuOpen ? styles.navWrapperOpen : ''}`}>
           <nav className={styles.nav}>
             {navLinks.map((item) => (
-              <Link key={item.href} className={styles.navLink} href={item.href}>
+              <Link
+                key={item.href}
+                className={`${styles.navLink} ${pathname === item.href ? styles.active : ''}`}
+                href={item.href}>
                 {item.label}
               </Link>
             ))}
