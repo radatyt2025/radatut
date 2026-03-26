@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import * as React from 'react';
 
 import { Card, CardContent } from '@/components/ui/card';
@@ -135,7 +136,9 @@ export const Team: React.FC = () => {
 
       <div className={styles.container}>
         <div className={styles.header}>
-          <Button variant='outline'>Детальніше</Button>
+          <Button variant="outline" asChild>
+            <Link href='/team'>Детальніше</Link>
+          </Button>
           <h2 className={styles.title}>КОМАНДА</h2>
         </div>
 
