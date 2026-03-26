@@ -60,7 +60,7 @@
   max-width: 1469px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 26px;
 }
 
 .header {
@@ -127,7 +127,7 @@
   gap: 24px;
   width: 100%;
 
-  padding: 16px;
+  padding: 12px;
   box-sizing: border-box;
 }
 
@@ -244,5 +244,9 @@
 @media (max-width: 480px) {
   .gridContainer {
     grid-template-columns: 1fr;
+    margin: 0 8px;
+  }
+  .header {
+    flex-direction: column;
   }
 }

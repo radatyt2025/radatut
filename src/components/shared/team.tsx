@@ -32,7 +32,7 @@ const teamMembers: TeamMember[] = [
     id: 2,
     name: 'Маркіян Костур',
     role: 'Голова студради',
-    imageSrc: '/hero.png',
+    imageSrc: '/images/hero.png',
   },
   {
     id: 3,
