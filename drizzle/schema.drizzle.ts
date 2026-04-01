@@ -19,3 +19,10 @@ export const users = pgTable('users', {
   provider: providerEnum('provider'),
   providerId: text('provider_id'),
 });
+
+export const team = pgTable('team', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  fullName: text('full_name').unique(),
+  role: text('role'),
+  imageSrc: text('image_src'),
+});

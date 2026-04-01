@@ -1,9 +1,6 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { signIn } from 'next-auth/react';
-import Image from 'next/image';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
@@ -18,43 +15,38 @@ import {
   FieldLabel,
 } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
-import styles from '@/css/login.module.css';
+import styles from '@/css/add-team-member.module.css';
+import { addTeamMember } from '@/lib/action/add-team-member';
 
-const loginFormSchema = z.object({
-  email: z.email({ message: 'Некоректна пошта' }),
-  password: z.string().min(1, 'Пароль обов’язковий'),
+const TeamMemeberFormSchema = z.object({
+  fullName: z.string().min(1),
+  role: z.string().min(1),
+  imageSrc: z.string().min(1),
 });
 
-export default function Login() {
+export default function AddTeamMember() {
   const router = useRouter();
 
-  const form = useForm<z.infer<typeof loginFormSchema>>({
-    resolver: zodResolver(loginFormSchema),
-    defaultValues: { email: '', password: '' },
+  const form = useForm<z.infer<typeof TeamMemeberFormSchema>>({
+    resolver: zodResolver(TeamMemeberFormSchema),
+    defaultValues: { fullName: '', role: '', imageSrc: '' },
   });
 
-  async function onSubmit(data: z.infer<typeof loginFormSchema>) {
-    const result = await signIn('credentials', {
-      email: data.email,
-      password: data.password,
-      redirect: false,
-    });
+  async function onSubmit(data: z.infer<typeof TeamMemeberFormSchema>) {
+    const response = await addTeamMember(data);
 
-    if (result?.error) {
-      form.setError('email', { type: 'manual', message: '' });
-      form.setError('password', {
-        type: 'manual',
-        message: 'Невірний логін або пароль',
-      });
-
-      toast.error('Спробуйте ще раз або перевірте введені дані');
+    if (!response.success) {
+      if (response.field) {
+        form.setError(response.field, { message: response.message });
+      } else {
+        toast.error(response.message);
+      }
       return;
     }
 
-    toast.success('Успішний вхід!');
+    toast.success('Успішно додано!');
     router.push('/');
   }
-
   return (
     <section className={styles.section}>
       <div className={styles.container}>
@@ -72,17 +64,17 @@ export default function Login() {
             <CardContent>
               <FieldGroup className={styles.fieldGroup}>
                 <Controller
-                  name="email"
+                  name="fullName"
                   control={form.control}
                   render={({ field, fieldState }) => (
                     <Field>
                       <FieldLabel className={styles.fieldLabel}>
-                        Логін
+                        Повне ім&apos;я
                       </FieldLabel>
                       <Input
                         {...field}
                         className={styles.inputField}
-                        placeholder="Введіть логін.."
+                        placeholder="Повне ім'я"
                       />
                       {fieldState.invalid && (
                         <FieldError errors={[fieldState.error]} />
@@ -92,18 +84,36 @@ export default function Login() {
                 />
 
                 <Controller
-                  name="password"
+                  name="role"
                   control={form.control}
                   render={({ field, fieldState }) => (
                     <Field>
                       <FieldLabel className={styles.fieldLabel}>
-                        Пароль
+                        Роль
                       </FieldLabel>
                       <Input
                         {...field}
-                        type="password"
                         className={styles.inputField}
-                        placeholder="Введіть пароль..."
+                        placeholder="Роль"
+                      />
+                      {fieldState.invalid && (
+                        <FieldError errors={[fieldState.error]} />
+                      )}
+                    </Field>
+                  )}
+                />
+                <Controller
+                  name="imageSrc"
+                  control={form.control}
+                  render={({ field, fieldState }) => (
+                    <Field>
+                      <FieldLabel className={styles.fieldLabel}>
+                        Зображення
+                      </FieldLabel>
+                      <Input
+                        {...field}
+                        className={styles.inputField}
+                        placeholder="Зображення"
                       />
                       {fieldState.invalid && (
                         <FieldError errors={[fieldState.error]} />
@@ -116,44 +126,11 @@ export default function Login() {
 
             <div className="flex justify-center">
               <Button type="submit" className={styles.submitButton}>
-                Увійти
+                Додати
               </Button>
-            </div>
-            <div className={styles.authSwitch}>
-              <span>Ще не маєте акаунту?</span>
-              <Link href="/register" className={styles.authLink}>
-                Зареєструватися
-              </Link>
             </div>
           </form>
         </Card>
-
-        <div className={styles.socialContainer}>
-          <Button
-            variant="secondary"
-            onClick={() => signIn('github', { callbackUrl: '/' })}
-            className={styles.socialButton}>
-            <Image
-              width={24}
-              height={24}
-              src="/images/git-hub.png"
-              alt="github"
-            />
-            GitHub
-          </Button>
-          <Button
-            variant="secondary"
-            onClick={() => signIn('google', { callbackUrl: '/' })}
-            className={styles.socialButton}>
-            <Image
-              width={24}
-              height={24}
-              src="/images/google.svg"
-              alt="google"
-            />
-            Google
-          </Button>
-        </div>
       </div>
     </section>
   );
