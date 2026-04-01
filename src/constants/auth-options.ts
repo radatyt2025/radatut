@@ -23,7 +23,7 @@ export const authOptions: AuthOptions = {
           name: profile.name || profile.login,
           email: profile.email,
           image: profile.avatar_url,
-          role: 'USER',
+          role: 'CLIENT',
         };
       },
     }),
@@ -38,17 +38,17 @@ export const authOptions: AuthOptions = {
           return null;
         }
 
-        const findUser = await db.query.users.findFirst({
+        const user = await db.query.users.findFirst({
           where: (users, { eq }) => eq(users.email, credentials.email),
         });
 
-        if (!findUser) {
+        if (!user) {
           return null;
         }
 
         const isPasswordValid = await compare(
           credentials.password,
-          findUser.password,
+          user.password || '',
         );
 
         if (!isPasswordValid) {
@@ -56,10 +56,10 @@ export const authOptions: AuthOptions = {
         }
 
         return {
-          id: findUser.id,
-          email: findUser.email,
-          name: findUser.fullName,
-          role: findUser.role,
+          id: user.id,
+          email: user.email,
+          name: user.fullName,
+          role: user.role || 'CLIENT',
         };
       },
     }),
@@ -118,7 +118,8 @@ export const authOptions: AuthOptions = {
 
         await db.insert(users).values({
           email: user.email,
-          password: '',
+          fullName: user.name,
+          image: user.image,
           provider: account.provider as 'google' | 'github' | 'credentials',
           providerId: account.providerAccountId,
         });
@@ -130,21 +131,12 @@ export const authOptions: AuthOptions = {
         return false;
       }
     },
-    async jwt({ token }) {
-      if (!token.email) {
-        return token;
-      }
-      const [userExist] = await db
-        .select()
-        .from(users)
-        .where(eq(users.email, token.email))
-        .limit(1);
-
-      if (userExist) {
-        token.id = String(userExist.id);
-        token.email = userExist.email;
-        token.fullName = userExist.fullName;
-        token.role = userExist.role;
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+        token.role = user.role;
+        token.fullName = user.name;
+        token.picture = user.image;
       }
 
       return token;
@@ -153,6 +145,7 @@ export const authOptions: AuthOptions = {
       if (session?.user) {
         session.user.id = token.id;
         session.user.role = token.role;
+        session.user.image = token.picture;
       }
 
       return session;
