@@ -3,6 +3,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { signIn } from 'next-auth/react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import * as z from 'zod';
@@ -31,6 +32,8 @@ const registerFormSchema = z
   });
 
 export default function Register() {
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof registerFormSchema>>({
     resolver: zodResolver(registerFormSchema),
     defaultValues: { email: '', password: '', confirmPassword: '' },
@@ -38,21 +41,39 @@ export default function Register() {
 
   async function onSubmit(data: z.infer<typeof registerFormSchema>) {
     const { email, password } = data;
-    await registerUser({ email, password });
-    await signIn('credentials', {
+
+    const response = await registerUser({ email, password });
+
+    if (!response.success) {
+      if (response.field) {
+        form.setError(response.field, { message: response.message });
+      } else {
+        toast.error(response.message);
+      }
+      return;
+    }
+
+    const result = await signIn('credentials', {
       email,
       password,
-      redirect: true,
-      callbackUrl: '/',
+      redirect: false,
     });
+
+    if (result?.error) {
+      toast.error('Помилка автоматичного входу');
+      return;
+    }
+
     toast.success('Успішно зареєстровано!');
+    router.push('/');
   }
 
   return (
     <section className={styles.section}>
       <div className={styles.container}>
         <h1 className={styles.mainHeading}>
-          Вітаємо у внутрішній системі студентської ради <br /> ІТ СТЕП Університету!
+          Вітаємо у внутрішній системі студентської ради <br /> ІТ СТЕП
+          Університету!
         </h1>
 
         <p className={styles.subHeading}>

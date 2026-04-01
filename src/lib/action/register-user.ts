@@ -1,3 +1,4 @@
+// src/lib/action/register-user.ts
 'use server';
 
 import { hashSync } from 'bcrypt';
@@ -11,7 +12,15 @@ type RegisterPayload = {
   password: string;
 };
 
-export async function registerUser(payload: RegisterPayload) {
+type RegisterUserResponse = {
+  success: boolean;
+  message?: string;
+  field?: 'email' | 'password';
+};
+
+export async function registerUser(
+  payload: RegisterPayload,
+): Promise<RegisterUserResponse> {
   try {
     const [isUserExist] = await db
       .select()
@@ -20,7 +29,11 @@ export async function registerUser(payload: RegisterPayload) {
       .limit(1);
 
     if (isUserExist) {
-      throw new Error('User already exist');
+      return {
+        success: false,
+        message: 'Користувач з цією поштою вже існує',
+        field: 'email',
+      };
     }
 
     await db.insert(users).values({
@@ -29,8 +42,13 @@ export async function registerUser(payload: RegisterPayload) {
       provider: 'credentials',
       providerId: 'credentials',
     });
+
+    return { success: true };
   } catch (error) {
-    console.error('Error while execution register-user:', error);
-    throw error;
+    console.error(error);
+    return {
+      success: false,
+      message: 'Сталася непередбачена помилка. Спробуйте пізніше.',
+    };
   }
 }

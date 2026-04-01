@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { signIn } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import * as z from 'zod';
@@ -26,6 +26,8 @@ const loginFormSchema = z.object({
 });
 
 export default function Login() {
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof loginFormSchema>>({
     resolver: zodResolver(loginFormSchema),
     defaultValues: { email: '', password: '' },
@@ -39,10 +41,18 @@ export default function Login() {
     });
 
     if (result?.error) {
-      toast.error('Невірний логін або пароль');
-    } else {
-      redirect('/');
+      form.setError('email', { type: 'manual', message: '' });
+      form.setError('password', {
+        type: 'manual',
+        message: 'Невірний логін або пароль',
+      });
+
+      toast.error('Спробуйте ще раз або перевірте введені дані');
+      return;
     }
+
+    toast.success('Успішний вхід!');
+    router.push('/');
   }
 
   return (
