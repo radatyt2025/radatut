@@ -42,7 +42,6 @@ export default function Team() {
         <div className={styles.list}>
           {mockTeamMembers.map((member) => (
             <div key={member.id} className={styles.card}>
-              {/* Image Section */}
               <div className={styles.imageWrapper}>
                 <Image
                   src={member.imageSrc}

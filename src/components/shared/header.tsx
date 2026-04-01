@@ -1,6 +1,7 @@
 'use client';
 
 import { Menu } from 'lucide-react';
+import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
@@ -36,6 +37,8 @@ export const Header: React.FC = () => {
     },
   ];
 
+  const { data: session } = useSession();
+
   return (
     <header className={styles.header}>
       <div className={styles.container}>
@@ -54,9 +57,19 @@ export const Header: React.FC = () => {
               </Link>
             ))}
           </nav>
-          <Button variant="link" className={styles.cabinetBtn} asChild>
-            <Link href="/office">Кабінет</Link>
-          </Button>
+          {!session ? (
+            <Button
+              // loading={session === undefined}
+              variant="link"
+              className={styles.cabinetBtn}
+              asChild>
+              <Link href="/login">Увійти</Link>
+            </Button>
+          ) : (
+            <Button variant="link" className={styles.cabinetBtn} asChild>
+              <Link href="/office">Кабінет</Link>
+            </Button>
+          )}
         </div>
 
         <button className={styles.hamburger} onClick={toggleMenu}>
