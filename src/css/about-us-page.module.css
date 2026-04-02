@@ -1,0 +1,176 @@
+.section {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  background-color: #fcfdfe;
+  overflow: hidden;
+}
+
+.container {
+  width: 100%;
+  max-width: 1469px;
+  display: flex;
+  flex-direction: column;
+  padding: 80px 24px;
+  gap: 100px;
+}
+
+.heroContent {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+}
+
+.leftSide {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.title {
+  color: #002aff;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.description {
+  color: #333;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  max-width: 650px;
+}
+
+.imageWrapper {
+  flex: 1;
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.mainCircle {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background-color: #ced6ff;
+  border-radius: 50%;
+  top: -80px;
+  left: -60px;
+  z-index: 0;
+  opacity: 0.7;
+}
+
+.teamImage {
+  position: relative;
+  z-index: 1;
+  border-radius: 30px;
+  object-fit: cover;
+  width: 100%;
+  max-width: 550px;
+  height: auto;
+}
+
+.galleryGrid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 20px;
+  width: 100%;
+  position: relative;
+}
+
+.galleryItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.galleryImg {
+  position: relative;
+  z-index: 1;
+  border-radius: 15px;
+  width: 100%;
+  height: 130px;
+  object-fit: cover;
+}
+
+.galleryCircle {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background-color: #ced6ff;
+  border-radius: 50%;
+  z-index: 0;
+  top: -30px;
+  left: 56%;
+}
+
+.smallerGalleryCircle {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  background-color: #ced6ff;
+  border-radius: 50%;
+  z-index: 0;
+  top: -40px;
+  right: 10px;
+}
+
+.joinButton {
+  background-color: #002aff;
+  color: white;
+  border-radius: 12px;
+  padding: 12px 32px;
+  width: max-content;
+  font-weight: 600;
+  height: 48px;
+  transition: transform 0.2s;
+  border: none;
+  cursor: pointer;
+  z-index: 100;
+}
+
+.joinButton:hover {
+  background-color: #001ecc;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 1200px) {
+  .galleryGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 1024px) {
+  .heroContent {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .container {
+    padding: 40px 24px;
+  }
+
+  .mainCircle {
+    right: 50%;
+    transform: translateX(50%);
+  }
+
+  .leftSide {
+    align-items: center;
+  }
+
+  .galleryGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .galleryCircle {
+  top: 200px;
+  left: 20%;
+}
+
+.smallerGalleryCircle {
+  top: -40px;
+  right: 10px;
+}
+}
