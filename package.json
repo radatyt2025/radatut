@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@chroma-core/openai": "^0.1.10",
+    "@google-cloud/storage": "^7.19.0",
     "@hookform/resolvers": "^5.2.2",
     "@reduxjs/toolkit": "^2.11.2",
     "axios": "^1.13.6",

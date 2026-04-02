@@ -22,7 +22,7 @@ export const users = pgTable('users', {
 
 export const team = pgTable('team', {
   id: uuid('id').primaryKey().defaultRandom(),
-  fullName: text('full_name').unique(),
-  role: text('role'),
-  imageSrc: text('image_src'),
+  fullName: text('full_name').unique().notNull(),
+  role: text('role').notNull(),
+  imageSrc: text('image_src').notNull(),
 });

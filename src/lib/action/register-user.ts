@@ -1,4 +1,3 @@
-// src/lib/action/register-user.ts
 'use server';
 
 import { hashSync } from 'bcrypt';

@@ -11,117 +11,15 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel';
 import styles from '@/css/team.module.css';
+import { getTeam } from '@/lib/get-team';
+import { TeamMemberModel } from '@/models/team.model';
 
 import { Button } from '../ui/button';
 
-interface TeamMember {
-  id: number;
-  name: string;
-  role: string;
-  imageSrc: string;
-}
+export const Team: React.FC = async () => {
+  const teamMembers = await getTeam();
 
-const teamMembers: TeamMember[] = [
-  {
-    id: 1,
-    name: 'Маркіян Костур',
-    role: 'Голова студради',
-    imageSrc: '/images/team-member.png',
-  },
-  {
-    id: 2,
-    name: 'Маркіян Костур',
-    role: 'Голова студради',
-    imageSrc: '/images/hero.png',
-  },
-  {
-    id: 3,
-    name: 'Маркіян Костур',
-    role: 'Голова студради',
-    imageSrc: '/images/team-member.png',
-  },
-  {
-    id: 4,
-    name: 'Маркіян Костур',
-    role: 'Голова студради',
-    imageSrc: '/images/team-member.png',
-  },
-  {
-    id: 5,
-    name: 'Маркіян Костур',
-    role: 'Голова студради',
-    imageSrc: '/images/team-member.png',
-  },
-  {
-    id: 6,
-    name: 'Маркіян Костур',
-    role: 'Голова студради',
-    imageSrc: '/images/team-member.png',
-  },
-  {
-    id: 7,
-    name: 'Маркіян Костур',
-    role: 'Голова студради',
-    imageSrc: '/images/team-member.png',
-  },
-  {
-    id: 8,
-    name: 'Маркіян Костур',
-    role: 'Голова студради',
-    imageSrc: '/images/team-member.png',
-  },
-  {
-    id: 9,
-    name: 'Маркіян Костур',
-    role: 'Голова студради',
-    imageSrc: '/images/team-member.png',
-  },
-  {
-    id: 10,
-    name: 'Маркіян Костур',
-    role: 'Голова студради',
-    imageSrc: '/images/team-member.png',
-  },
-  {
-    id: 11,
-    name: 'Маркіян Костур',
-    role: 'Голова студради',
-    imageSrc: '/images/team-member.png',
-  },
-  {
-    id: 12,
-    name: 'Маркіян Костур',
-    role: 'Голова студради',
-    imageSrc: '/images/team-member.png',
-  },
-  {
-    id: 13,
-    name: 'Маркіян Костур',
-    role: 'Голова студради',
-    imageSrc: '/images/team-member.png',
-  },
-  {
-    id: 14,
-    name: 'Маркіян Костур',
-    role: 'Голова студради',
-    imageSrc: '/images/team-member.png',
-  },
-  {
-    id: 15,
-    name: 'Маркіян Костур',
-    role: 'Голова студради',
-    imageSrc: '/images/team-member.png',
-  },
-  {
-    id: 16,
-    name: 'Маркіян Костур',
-    role: 'Голова студради',
-    imageSrc: '/images/team-member.png',
-  },
-];
-
-export const Team: React.FC = () => {
-  const chunkedMembers: TeamMember[][] = [];
+  const chunkedMembers: TeamMemberModel[][] = [];
   for (let i = 0; i < teamMembers.length; i += 8) {
     chunkedMembers.push(teamMembers.slice(i, i + 8));
   }
@@ -137,7 +35,7 @@ export const Team: React.FC = () => {
       <div className={styles.container}>
         <div className={styles.header}>
           <Button variant="outline" asChild>
-            <Link href='/team'>Детальніше</Link>
+            <Link href="/team">Детальніше</Link>
           </Button>
           <h2 className={styles.title}>КОМАНДА</h2>
         </div>
@@ -148,18 +46,18 @@ export const Team: React.FC = () => {
               {chunkedMembers.map((group, groupIndex) => (
                 <CarouselItem key={groupIndex} className={styles.carouselItem}>
                   <div className={styles.gridContainer}>
-                    {group.map(({ id, name, imageSrc, role }) => (
+                    {group.map(({ id, fullName, imageSrc, role }) => (
                       <Card key={id} className={styles.cardContainer}>
                         <CardContent className={styles.teamCard}>
                           <Image
                             src={imageSrc}
                             fill
-                            alt={name}
+                            alt={fullName}
                             className={styles.image}
                           />
                           <div className={styles.gradientOverlay} />
                           <div className={styles.cardContentOverlay}>
-                            <h3 className={styles.memberName}>{name}</h3>
+                            <h3 className={styles.memberName}>{fullName}</h3>
                             <p className={styles.memberRole}>{role}</p>
                           </div>
                         </CardContent>

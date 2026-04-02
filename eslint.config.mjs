@@ -40,6 +40,14 @@ const eslintConfig = defineConfig([
           ignore: ['README.md', 'LICENSE'],
         },
       ],
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_',
+        },
+      ],
     },
   },
 ]);

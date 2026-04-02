@@ -1,52 +1,27 @@
-'use client';
+import Image from 'next/image';
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter } from 'next/navigation';
-import { Controller, useForm } from 'react-hook-form';
-import { toast } from 'sonner';
-import * as z from 'zod';
-
-import { Button } from '@/components/ui/button';
+import { AddTeamMemberForm } from '@/components/shared/add-team-memeber-form';
+import { DeleteMemberButton } from '@/components/shared/delete-member-button';
 import { Card, CardContent } from '@/components/ui/card';
 import {
-  Field,
-  FieldError,
-  FieldGroup,
-  FieldLabel,
-} from '@/components/ui/field';
-import { Input } from '@/components/ui/input';
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel';
 import styles from '@/css/add-team-member.module.css';
-import { addTeamMember } from '@/lib/action/add-team-member';
+import { getTeam } from '@/lib/get-team';
+import { TeamMemberModel } from '@/models/team.model';
 
-const TeamMemeberFormSchema = z.object({
-  fullName: z.string().min(1),
-  role: z.string().min(1),
-  imageSrc: z.string().min(1),
-});
+export default async function AddTeamMember() {
+  const teamMembers = await getTeam();
 
-export default function AddTeamMember() {
-  const router = useRouter();
-
-  const form = useForm<z.infer<typeof TeamMemeberFormSchema>>({
-    resolver: zodResolver(TeamMemeberFormSchema),
-    defaultValues: { fullName: '', role: '', imageSrc: '' },
-  });
-
-  async function onSubmit(data: z.infer<typeof TeamMemeberFormSchema>) {
-    const response = await addTeamMember(data);
-
-    if (!response.success) {
-      if (response.field) {
-        form.setError(response.field, { message: response.message });
-      } else {
-        toast.error(response.message);
-      }
-      return;
-    }
-
-    toast.success('Успішно додано!');
-    router.push('/');
+  const chunkedMembers: TeamMemberModel[][] = [];
+  for (let i = 0; i < teamMembers.length; i += 8) {
+    chunkedMembers.push(teamMembers.slice(i, i + 8));
   }
+
   return (
     <section className={styles.section}>
       <div className={styles.container}>
@@ -59,78 +34,41 @@ export default function AddTeamMember() {
           Ця система для роботи лише членів студентської ради :&#41;
         </p>
 
-        <Card className={styles.formCard}>
-          <form onSubmit={form.handleSubmit(onSubmit)}>
-            <CardContent>
-              <FieldGroup className={styles.fieldGroup}>
-                <Controller
-                  name="fullName"
-                  control={form.control}
-                  render={({ field, fieldState }) => (
-                    <Field>
-                      <FieldLabel className={styles.fieldLabel}>
-                        Повне ім&apos;я
-                      </FieldLabel>
-                      <Input
-                        {...field}
-                        className={styles.inputField}
-                        placeholder="Повне ім'я"
-                      />
-                      {fieldState.invalid && (
-                        <FieldError errors={[fieldState.error]} />
-                      )}
-                    </Field>
-                  )}
-                />
-
-                <Controller
-                  name="role"
-                  control={form.control}
-                  render={({ field, fieldState }) => (
-                    <Field>
-                      <FieldLabel className={styles.fieldLabel}>
-                        Роль
-                      </FieldLabel>
-                      <Input
-                        {...field}
-                        className={styles.inputField}
-                        placeholder="Роль"
-                      />
-                      {fieldState.invalid && (
-                        <FieldError errors={[fieldState.error]} />
-                      )}
-                    </Field>
-                  )}
-                />
-                <Controller
-                  name="imageSrc"
-                  control={form.control}
-                  render={({ field, fieldState }) => (
-                    <Field>
-                      <FieldLabel className={styles.fieldLabel}>
-                        Зображення
-                      </FieldLabel>
-                      <Input
-                        {...field}
-                        className={styles.inputField}
-                        placeholder="Зображення"
-                      />
-                      {fieldState.invalid && (
-                        <FieldError errors={[fieldState.error]} />
-                      )}
-                    </Field>
-                  )}
-                />
-              </FieldGroup>
-            </CardContent>
-
-            <div className="flex justify-center">
-              <Button type="submit" className={styles.submitButton}>
-                Додати
-              </Button>
+        <div className={styles.carouselWrapper}>
+          <Carousel opts={{ align: 'start' }} className={styles.carouselMain}>
+            <CarouselContent className={styles.carouselContent}>
+              {chunkedMembers.map((group, groupIndex) => (
+                <CarouselItem key={groupIndex} className={styles.carouselItem}>
+                  <div className={styles.gridContainer}>
+                    {group.map(({ id, fullName, imageSrc, role }) => (
+                      <Card key={id} className={styles.cardContainer}>
+                        <CardContent className={styles.teamCard}>
+                          <Image
+                            src={imageSrc}
+                            fill
+                            alt={fullName}
+                            className={styles.image}
+                          />
+                          <div className={styles.gradientOverlay} />
+                          <div className={styles.cardContentOverlay}>
+                            <h3 className={styles.memberName}>{fullName}</h3>
+                            <p className={styles.memberRole}>{role}</p>
+                          </div>
+                          <DeleteMemberButton id={id} />
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <div className={styles.controlsWrapper}>
+              <CarouselPrevious className={styles.carouselControl} />
+              <CarouselNext className={styles.carouselControl} />
             </div>
-          </form>
-        </Card>
+          </Carousel>
+        </div>
+        <AddTeamMemberForm />
       </div>
     </section>
   );
