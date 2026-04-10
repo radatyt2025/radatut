@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 
 import { AddTeamMemberForm } from '@/components/shared/add-team-memeber-form';
 import { DeleteMemberButton } from '@/components/shared/delete-member-button';

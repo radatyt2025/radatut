@@ -1,6 +1,7 @@
 'use client';
 
 import { Trash } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import React, { useTransition } from 'react';
 import { toast } from 'sonner';
 
@@ -15,6 +16,7 @@ interface Props {
 
 export const DeleteMemberButton: React.FC<Props> = ({ id }) => {
   const [isPending, startTransition] = useTransition();
+  const router = useRouter();
 
   const handleDelete = () => {
     startTransition(async () => {
@@ -22,6 +24,7 @@ export const DeleteMemberButton: React.FC<Props> = ({ id }) => {
 
       if (result.success) {
         toast.success(result.message);
+        router.refresh();
       } else {
         toast.error(result.message);
       }
