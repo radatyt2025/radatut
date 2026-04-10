@@ -2,6 +2,7 @@
 
 import { Storage } from '@google-cloud/storage';
 import { eq } from 'drizzle-orm';
+import { revalidatePath } from 'next/cache';
 
 import { db } from '../../../drizzle/drizzle-client';
 import { team } from '../../../drizzle/schema.drizzle';
@@ -67,6 +68,10 @@ export async function addTeamMember(
       role: payload.role,
       imageSrc,
     });
+
+    revalidatePath('/');
+    revalidatePath('/team');
+    revalidatePath('/dashboard/team-members');
 
     return { success: true };
   } catch (error) {

@@ -10,7 +10,9 @@ export async function deleteTeamMember(id: string) {
   try {
     await db.delete(team).where(eq(team.id, id));
 
-    revalidatePath('/dashboard/add-team-member');
+    revalidatePath('/');
+    revalidatePath('/team');
+    revalidatePath('/dashboard/team-members');
 
     return { success: true, message: 'Успішно видалено' };
   } catch (error) {

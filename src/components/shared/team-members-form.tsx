@@ -26,7 +26,7 @@ const TeamMemberFormSchema = z.object({
   imageFile: z.instanceof(File, { message: 'Зображення є обов\'язковим' }),
 });
 
-export const AddTeamMemberForm: React.FC = () => {
+export const TeamMembersForm: React.FC = () => {
   const router = useRouter();
 
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);

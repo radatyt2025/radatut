@@ -1,7 +1,7 @@
 export const dynamic = 'force-dynamic';
 
-import { AddTeamMemberForm } from '@/components/shared/add-team-memeber-form';
 import { DeleteMemberButton } from '@/components/shared/delete-member-button';
+import { TeamMembersForm } from '@/components/shared/team-members-form';
 import { Card, CardContent } from '@/components/ui/card';
 import {
   Carousel,
@@ -10,11 +10,11 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
-import styles from '@/css/add-team-member.module.css';
+import styles from '@/css/team-members.module.css';
 import { getTeam } from '@/lib/get-team';
 import { TeamMemberModel } from '@/models/team.model';
 
-export default async function AddTeamMember() {
+export default async function TeamMembers() {
   const teamMembers = await getTeam();
 
   const chunkedMembers: TeamMemberModel[][] = [];
@@ -67,7 +67,7 @@ export default async function AddTeamMember() {
             </div>
           </Carousel>
         </div>
-        <AddTeamMemberForm />
+        <TeamMembersForm />
       </div>
     </section>
   );
