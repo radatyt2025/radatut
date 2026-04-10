@@ -5,7 +5,7 @@ import styles from '@/css/hero.module.css';
 export const Hero: React.FC = () => {
   return (
     <section className={styles.section}>
-      <div className={styles.heroContainer}>
+      <div className="container">
         <div className={styles.heroImageCard}>
           <Image
             src="/images/hero.png"

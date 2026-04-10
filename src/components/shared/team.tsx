@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import * as React from 'react';
 
@@ -49,9 +48,8 @@ export const Team: React.FC = async () => {
                     {group.map(({ id, fullName, imageSrc, role }) => (
                       <Card key={id} className={styles.cardContainer}>
                         <CardContent className={styles.teamCard}>
-                          <Image
+                          <img
                             src={imageSrc}
-                            fill
                             alt={fullName}
                             className={styles.image}
                           />

@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import * as React from 'react';
 
 import { Button } from '@/components/ui/button';
@@ -54,10 +53,9 @@ export const Events: React.FC = () => {
                 <CarouselItem key={event.id} className="basis-full">
                   <div className={styles.card}>
                     <div className={styles.imageWrapper}>
-                      <Image
+                      <img
                         src={event.imageSrc}
                         alt={event.title}
-                        fill
                         className={styles.image}
                       />
                     </div>

@@ -6,13 +6,6 @@
   background-color: #f8f9fa;
 }
 
-.heroContainer {
-  width: 100%;
-  max-width: 1469px;
-  padding: 24px;
-  box-sizing: border-box;
-}
-
 .heroImageCard {
   position: relative;
   width: 100%;
@@ -70,8 +63,8 @@
 
 .aboutContainer {
   width: 100%;
-  max-width: 1469px;
-  padding: 48px 24px 80px 24px;
+  max-width: 1200px;
+  padding: 2rem 0 2rem 0;
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
@@ -103,6 +96,7 @@
   .aboutContainer {
     flex-direction: column;
     gap: 24px;
+    max-width: 920px;
   }
 
   .aboutTitle {
@@ -111,6 +105,11 @@
 }
 
 @media (max-width: 768px) {
+  .aboutContainer {
+    width: 90%;
+    max-width: max-content;
+  }
+
   .heroImageCard {
     height: 400px;
   }

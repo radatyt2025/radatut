@@ -1,4 +1,3 @@
-import Image from 'next/image';
 
 import { AddTeamMemberForm } from '@/components/shared/add-team-memeber-form';
 import { DeleteMemberButton } from '@/components/shared/delete-member-button';
@@ -43,9 +42,8 @@ export default async function AddTeamMember() {
                     {group.map(({ id, fullName, imageSrc, role }) => (
                       <Card key={id} className={styles.cardContainer}>
                         <CardContent className={styles.teamCard}>
-                          <Image
+                          <img
                             src={imageSrc}
-                            fill
                             alt={fullName}
                             className={styles.image}
                           />

@@ -8,7 +8,6 @@ export const Footer: React.FC = () => {
   const navLinks = [
     { label: 'Події', href: '/events' },
     { label: 'Про нас', href: '/about-us' },
-    { label: 'Нормативні документи', href: '/documents' },
     { label: 'Вибори голови ОСС', href: '/elections' },
     { label: 'Кабінет', href: '/cabinet' },
   ];

@@ -1,7 +1,6 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 import { useState, useEffect } from 'react';
@@ -109,7 +108,10 @@ export const AddTeamMemberForm: React.FC = () => {
             <Controller
               name="imageFile"
               control={form.control}
-              render={({ field: { onChange, value: _value, ...rest }, fieldState }) => (
+              render={({
+                field: { onChange, value: _value, ...rest },
+                fieldState,
+              }) => (
                 <Field>
                   <FieldLabel className={styles.fieldLabel}>
                     Зображення
@@ -132,7 +134,7 @@ export const AddTeamMemberForm: React.FC = () => {
 
                   {previewUrl && (
                     <div className="mt-4 flex justify-center">
-                      <Image
+                      <img
                         width={128}
                         height={128}
                         src={previewUrl}

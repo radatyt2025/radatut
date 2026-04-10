@@ -2,7 +2,6 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { signIn } from 'next-auth/react';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
@@ -161,7 +160,7 @@ export default function Register() {
               signIn('github', { callbackUrl: '/', redirect: true })
             }
             className={styles.socialButton}>
-            <Image
+            <img
               width={24}
               height={24}
               src="/images/git-hub.png"
@@ -175,12 +174,7 @@ export default function Register() {
               signIn('google', { callbackUrl: '/', redirect: true })
             }
             className={styles.socialButton}>
-            <Image
-              width={24}
-              height={24}
-              src="/images/google.svg"
-              alt="google"
-            />
+            <img width={24} height={24} src="/images/google.svg" alt="google" />
             Google
           </Button>
         </div>

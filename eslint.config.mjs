@@ -22,6 +22,7 @@ const eslintConfig = defineConfig([
   },
   {
     rules: {
+      '@next/next/no-img-element': 'off',
       '@stylistic/indent': ['error', 2],
       '@stylistic/semi': ['error', 'always'],
       '@stylistic/quotes': ['error', 'single'],

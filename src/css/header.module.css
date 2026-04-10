@@ -7,9 +7,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 1469px;
+  width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 20px 24px;
+  padding: 20px 0;
+  box-sizing: border-box;
 }
 
 .logo {
@@ -32,7 +34,8 @@
   margin: 0 auto;
 }
 
-.navLink, .cabinetBtn {
+.navLink,
+.cabinetBtn {
   position: relative;
   color: #333333;
   text-decoration: none;
@@ -46,11 +49,10 @@
   height: 2px;
   bottom: 0;
   left: 0;
-  background-color: #0026ff; 
-  box-shadow: 0 0 8px rgba(0, 38, 255, 0.6); 
-  transform: scaleX(0); 
-  transform-origin: bottom right;
-  transition: transform 0.3s ease-out;
+  background-color: #0026ff;
+  transform: scaleX(0);
+  transform-origin: bottom left; 
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .navLink:hover,
@@ -61,12 +63,6 @@
 .navLink:hover::after,
 .navLink.active::after {
   transform: scaleX(1);
-  transform-origin: bottom left;
-}
-
-.navLink:hover::after {
-  transform: scaleX(1); 
-  transform-origin: bottom left; 
 }
 
 .cabinetBtn {
@@ -80,6 +76,12 @@
   font-size: 24px;
   cursor: pointer;
   color: #333333;
+}
+
+@media (max-width: 1280px) {
+  .container {
+    width: 90%;
+  }
 }
 
 @media (max-width: 820px) {
@@ -109,5 +111,11 @@
     flex-direction: column;
     align-items: center;
     gap: 24px;
+  }
+}
+
+@media (max-width: 720px) {
+  .container {
+    width: 90%;
   }
 }

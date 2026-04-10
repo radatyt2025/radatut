@@ -31,10 +31,6 @@ export const Header: React.FC = () => {
       label: 'Події',
       href: '/events',
     },
-    {
-      label: 'Нормативні документи',
-      href: '/documents',
-    },
   ];
 
   const { data: session } = useSession();

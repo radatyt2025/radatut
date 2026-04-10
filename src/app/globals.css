@@ -107,3 +107,29 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 0;
+  box-sizing: border-box;
+}
+
+@media (max-width: 1280px) {
+  .container {
+    width: 90%;
+  }
+}
+
+.aboutTitle {
+  font-size: 80px;
+  font-weight: 300;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+  color: #0033ff;
+  margin: 0;
+  line-height: 1;
+}

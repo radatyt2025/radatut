@@ -1,5 +1,4 @@
 import { Instagram, Send } from 'lucide-react';
-import Image from 'next/image';
 
 import styles from '@/css/team-page.module.css';
 
@@ -34,8 +33,8 @@ export default function Team() {
           <h1 className={styles.title}>Команда</h1>
           <p className={styles.subtitle}>
             Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry&apos;s standard dummy text
-            ever since the 1500s
+            industry. Lorem Ipsum has been the industry&apos;s standard dummy
+            text ever since the 1500s
           </p>
         </div>
 
@@ -43,10 +42,9 @@ export default function Team() {
           {mockTeamMembers.map((member) => (
             <div key={member.id} className={styles.card}>
               <div className={styles.imageWrapper}>
-                <Image
+                <img
                   src={member.imageSrc}
                   alt={member.name}
-                  fill
                   className={styles.image}
                 />
                 <div className={styles.mobileOverlay} />

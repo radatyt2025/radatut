@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import * as React from 'react';
 
 import { Button } from '@/components/ui/button';
@@ -10,10 +9,9 @@ export const AboutUs: React.FC = () => {
       <div className={styles.container}>
         <div className={styles.contentWrapper}>
           <div className={styles.largeImageContainer}>
-            <Image
+            <img
               src="/images/hero.png"
               alt="Студентська рада подія 1"
-              fill
               className={styles.image}
             />
           </div>
@@ -23,18 +21,16 @@ export const AboutUs: React.FC = () => {
             </div>
             <div className={styles.smallImagesRow}>
               <div className={styles.smallImageContainer}>
-                <Image
+                <img
                   src="/images/about-us-1.png"
                   alt="Студентська рада подія 2"
-                  fill
                   className={styles.image}
                 />
               </div>
               <div className={styles.smallImageContainer}>
-                <Image
+                <img
                   src="/images/about-us-2.png"
                   alt="Студентська рада подія 3"
-                  fill
                   className={styles.image}
                 />
               </div>

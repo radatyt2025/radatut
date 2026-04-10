@@ -1,0 +1,124 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  padding: 40px 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.aboutTitle {
+  font-size: 80px;
+  font-weight: 300;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+  color: #0033ff;
+  margin: 0;
+  line-height: 1;
+}
+
+.subtitle {
+  font-family: 'Brush Script MT', 'Lucida Handwriting', cursive;
+  font-size: 32px;
+  color: #1A1A1A;
+  margin-bottom: 8px; 
+}
+
+
+.cardsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  
+  width: calc(25% - 15px); 
+  min-width: 240px;
+  background-color: #EEF2FF;
+  border-radius: 12px;
+  overflow: hidden; 
+}
+
+.cardImage {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
+
+.cardContent {
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex-grow: 1;
+  gap: 12px;
+}
+
+.cardTitle {
+  font-family: sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: #0033ff;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.cardText {
+  font-family: sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #1A1A1A;
+  margin: 0;
+}
+
+
+@media (max-width: 1024px) {
+  .card {
+    
+    width: calc(33.333% - 14px); 
+  }
+  
+  .aboutTitle {
+    font-size: 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .card {
+    
+    width: calc(50% - 10px); 
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    
+    width: 100%; 
+  }
+  
+  .aboutTitle {
+    font-size: 48px;
+  }
+}

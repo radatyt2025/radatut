@@ -1,7 +1,6 @@
 'use client';
 
 import { signOut, useSession } from 'next-auth/react';
-import Image from 'next/image';
 
 import { Button } from '@/components/ui/button';
 import styles from '@/css/office.module.css';
@@ -18,7 +17,7 @@ export default function Office() {
       <div className={styles.container}>
         {session && (
           <div className="flex flex-col">
-            <Image
+            <img
               width={200}
               height={200}
               src={session.user.image ?? '/images/default-avatar.webp'}

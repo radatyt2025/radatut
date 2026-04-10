@@ -1,0 +1,104 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+  padding: 40px 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
+.titleContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+}
+
+.aboutTitle {
+  font-size: 80px;
+  font-weight: 300;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+  color: #0033ff;
+  margin: 0;
+  line-height: 1.1;
+}
+
+
+.documentsList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.documentLink {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-decoration: none;
+  color: #0033ff;
+  transition: opacity 0.2s ease;
+}
+
+.documentLink:hover {
+  opacity: 0.7;
+}
+
+.icon {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+}
+
+.documentText {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+
+@media (max-width: 1024px) {
+  .aboutTitle {
+    font-size: 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    gap: 40px;
+  }
+
+  .titleContainer {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .aboutTitle {
+    font-size: 48px;
+  }
+
+  .documentText {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .aboutTitle {
+    font-size: 40px;
+  }
+  
+  .documentText {
+    font-size: 16px;
+  }
+  
+  .icon {
+    width: 24px;
+    height: 24px;
+  }
+}
