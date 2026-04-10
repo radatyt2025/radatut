@@ -17,7 +17,7 @@ import {
   FieldLabel,
 } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
-import styles from '@/css/add-team-member.module.css';
+import styles from '@/css/team-members.module.css';
 import { addTeamMember } from '@/lib/action/add-team-member';
 
 const TeamMemberFormSchema = z.object({

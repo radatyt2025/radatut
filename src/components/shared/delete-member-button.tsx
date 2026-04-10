@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import React, { useTransition } from 'react';
 import { toast } from 'sonner';
 
-import styles from '@/css/add-team-member.module.css';
+import styles from '@/css/team-members.module.css';
 import { deleteTeamMember } from '@/lib/action/delete-team-member';
 
 import { Button } from '../ui/button';
