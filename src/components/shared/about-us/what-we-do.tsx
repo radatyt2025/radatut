@@ -35,24 +35,29 @@ export const WhatWeDo: React.FC = () => {
         'Працюємо з іншими студентськими організаціями, партнерами та міськими ініціативами.',
     },
   ];
+
   return (
     <Container>
-      <h2 className={styles.heading}>ЩО МИ РОБИМО</h2>
-      <div className={styles.grid}>
-        {cardsData.map((card) => (
-          <div key={card.id} className={styles.card}>
-            <div className={styles.gradientOverlay} />
-            <img
-              className={styles.image}
-              src={card.imageSrc}
-              alt={card.title}
-            />
-            <div className={styles.cardContent}>
-              <h3 className={styles.cardTitle}>{card.title}</h3>
-              <p className={styles.cardDescription}>{card.description}</p>
+      <div className={styles.sectionWrapper}>
+        <h2 className={styles.heading}>ЩО МИ РОБИМО</h2>
+        <div className={styles.grid}>
+          {cardsData.map((card) => (
+            <div key={card.id} className={styles.card}>
+              <div className={styles.imageWrapper}>
+                <img
+                  className={styles.image}
+                  src={card.imageSrc}
+                  alt={card.title}
+                />
+              </div>
+              <div className={styles.gradientOverlay} />
+              <div className={styles.cardContent}>
+                <h3 className={styles.cardTitle}>{card.title}</h3>
+                <p className={styles.cardDescription}>{card.description}</p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </Container>
   );
