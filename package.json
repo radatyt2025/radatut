@@ -20,7 +20,7 @@
     "@google-cloud/storage": "^7.19.0",
     "@hookform/resolvers": "^5.2.2",
     "@reduxjs/toolkit": "^2.11.2",
-    "axios": "^1.13.6",
+    "axios": "^1.15.0",
     "bcrypt": "^6.0.0",
     "chromadb": "^3.3.3",
     "class-variance-authority": "^0.7.1",
