@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
+import { headerLabels, navLinks } from '@/constants/shared/header';
 import styles from '@/css/header.module.css';
 
 import { Button } from '../ui/button';
@@ -18,28 +19,13 @@ export const Header: React.FC = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const navLinks = [
-    {
-      label: 'Про нас',
-      href: '/about-us',
-    },
-    {
-      label: 'Команда',
-      href: '/team',
-    },
-    {
-      label: 'Події',
-      href: '/events',
-    },
-  ];
-
   const { data: session } = useSession();
 
   return (
     <header className={styles.header}>
       <div className={styles.container}>
         <Button className={styles.logo} variant="link" asChild>
-          <Link href="/">РадаТут</Link>
+          <Link href={headerLabels.homeHref}>{headerLabels.logo}</Link>
         </Button>
         <div
           className={`${styles.navWrapper} ${isMenuOpen ? styles.navWrapperOpen : ''}`}>
@@ -54,16 +40,12 @@ export const Header: React.FC = () => {
             ))}
           </nav>
           {!session ? (
-            <Button
-              // loading={session === undefined}
-              variant="link"
-              className={styles.cabinetBtn}
-              asChild>
-              <Link href="/login">Увійти</Link>
+            <Button variant="link" className={styles.cabinetBtn} asChild>
+              <Link href={headerLabels.login.href}>{headerLabels.login.label}</Link>
             </Button>
           ) : (
             <Button variant="link" className={styles.cabinetBtn} asChild>
-              <Link href="/office">Кабінет</Link>
+              <Link href={headerLabels.cabinet.href}>{headerLabels.cabinet.label}</Link>
             </Button>
           )}
         </div>

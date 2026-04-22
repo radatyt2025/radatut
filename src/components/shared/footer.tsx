@@ -1,27 +1,21 @@
 import Link from 'next/link';
 
+import { footerData } from '@/constants/shared/footer';
 import styles from '@/css/footer.module.css';
 
 import { Button } from '../ui/button';
 
 export const Footer: React.FC = () => {
-  const navLinks = [
-    { label: 'Події', href: '/events' },
-    { label: 'Про нас', href: '/about-us' },
-    { label: 'Вибори голови ОСС', href: '/elections' },
-    { label: 'Кабінет', href: '/cabinet' },
-  ];
-
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
         <div className={styles.leftSection}>
           <div className={styles.brand}>
             <Button className={styles.logo} variant="link" asChild>
-              <Link href="/">РадаТут</Link>
+              <Link href={footerData.logo.href}>{footerData.logo.label}</Link>
             </Button>
             <a
-              href="https://instagram.com"
+              href={footerData.socials[0].href}
               target="_blank"
               rel="noopener noreferrer"
               className={styles.socialLink}
@@ -43,7 +37,7 @@ export const Footer: React.FC = () => {
           </div>
           <nav className={styles.nav}>
             <ul className={styles.navList}>
-              {navLinks.map((link) => (
+              {footerData.navLinks.map((link) => (
                 <li key={link.href}>
                   <Link href={link.href} className={styles.link}>
                     {link.label}
@@ -56,20 +50,19 @@ export const Footer: React.FC = () => {
 
         <div className={styles.rightSection}>
           <div className={styles.contactInfo}>
-            <a href="tel:+380000000000" className={styles.link}>
-              +380 00 000 00 00
+            <a href={footerData.contacts.phone.href} className={styles.link}>
+              {footerData.contacts.phone.label}
             </a>
-            <a href="mailto:itstepsupport@gmail.com" className={styles.link}>
-              itstepsupport@gmail.com
+            <a href={footerData.contacts.email.href} className={styles.link}>
+              {footerData.contacts.email.label}
             </a>
           </div>
           <div className={styles.legalInfo}>
-            <Link href="/privacy" className={styles.link}>
-              Політика конфіденційності
-            </Link>
-            <Link href="/terms" className={styles.link}>
-              Умови користування
-            </Link>
+            {footerData.legal.map((item) => (
+              <Link key={item.href} href={item.href} className={styles.link}>
+                {item.label}
+              </Link>
+            ))}
           </div>
         </div>
       </div>

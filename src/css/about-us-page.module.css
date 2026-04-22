@@ -112,10 +112,9 @@
   background-color: #002aff;
   color: white;
   border-radius: 12px;
-  padding: 12px 32px;
+  padding: 0 42px;
   width: max-content;
   font-weight: 600;
-  height: 48px;
   transition: transform 0.2s;
   border: none;
   cursor: pointer;

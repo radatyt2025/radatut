@@ -9,6 +9,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
+import { teamData } from '@/constants/home/team';
 import styles from '@/css/team.module.css';
 import { getTeam } from '@/lib/get-team';
 import { TeamMemberModel } from '@/models/team.model';
@@ -36,7 +37,7 @@ export const Team: React.FC = async () => {
           <Button variant="outline" asChild>
             <Link href="/team">Детальніше</Link>
           </Button>
-          <h2 className={styles.title}>КОМАНДА</h2>
+          <h2 className={styles.title}>{teamData.title}</h2>
         </div>
 
         <div className={styles.carouselWrapper}>

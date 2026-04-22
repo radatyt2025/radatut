@@ -1,17 +1,9 @@
 .sectionWrapper {
-  padding: 4rem 2rem;
-  background-color: #fafafa;
   font-family:
     system-ui,
     -apple-system,
     sans-serif;
   box-sizing: border-box;
-}
-
-@media (min-width: 768px) {
-  .sectionWrapper {
-    padding: 6rem 4rem;
-  }
 }
 
 .heading {

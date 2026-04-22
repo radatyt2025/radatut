@@ -2,6 +2,7 @@
 
 import { AboutUsSection } from '@/components/shared/about-us/about-us';
 import { Achievements } from '@/components/shared/about-us/achievements';
+import { OurValues } from '@/components/shared/about-us/our-values';
 import { RegulatoryDocuments } from '@/components/shared/about-us/regulatory-documents';
 import { StudentBenefits } from '@/components/shared/about-us/student-benefits';
 import { WhatWeDo } from '@/components/shared/about-us/what-we-do';
@@ -68,6 +69,7 @@ export default function AboutUs() {
       </section>
       <AboutUsSection />
       <WhatWeDo />
+      <OurValues />
       <StudentBenefits />
       <Achievements />
       <RegulatoryDocuments />

@@ -1,0 +1,149 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 20px 20px;
+  width: 100%;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+}
+
+.title {
+  font-size: 64px;
+  font-weight: 300;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+  margin: 0;
+  line-height: 1;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.card {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  background-color: #f2f4fb; 
+  border-radius: 16px;
+  padding: 24px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.imageWrapper {
+  flex: 0 0 45%;
+  min-height: 280px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardTitle {
+  font-size: 32px;
+  font-weight: 700;
+  color: #0026ff; 
+  margin: 0 0 8px 0;
+}
+
+.date {
+  font-size: 24px;
+  font-weight: 500;
+  color: #1a1a1a;
+  margin: 0 0 24px 0;
+}
+
+.description {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #333333;
+  margin: 0 0 32px 0;
+}
+
+.actions {
+  display: flex;
+  gap: 16px;
+  margin-top: auto; 
+}
+
+.primaryButton,
+.secondaryButton {
+  padding: 10px 24px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 12px; 
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+.primaryButton {
+  background-color: #0026ff;
+  color: #ffffff;
+  border: 1px solid #0026ff;
+}
+
+.primaryButton:hover {
+  background-color: #001ecc;
+  border-color: #001ecc;
+}
+
+.secondaryButton {
+  background-color: transparent;
+  color: #0026ff;
+  border: 1px solid #0026ff;
+}
+
+.secondaryButton:hover {
+  background-color: rgba(0, 38, 255, 0.05);
+}
+
+
+@media (max-width: 900px) {
+  .card {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .imageWrapper {
+    flex: 0 0 auto;
+    width: 100%;
+    height: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 36px;
+  }
+
+  .actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    width: 100%;
+    text-align: center;
+  }
+}

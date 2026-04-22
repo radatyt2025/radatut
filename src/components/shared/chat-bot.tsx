@@ -4,6 +4,7 @@ import React from 'react';
 
 import type { Message } from '@/store/chatbot/chatbot.api';
 
+import { chatLabels } from '@/constants/home/chat-bot';
 import styles from '@/css/chat-bot.module.css';
 import { useSendMessageMutation } from '@/store/chatbot/chatbot.api';
 
@@ -76,10 +77,9 @@ export const ChatBot: React.FC = () => {
     <section className={styles.section}>
       <div className={styles.container}>
         <div className={styles.header}>
-          <h2 className={styles.title}>Є ЗАПИТАННЯ?</h2>
+          <h2 className={styles.title}>{chatLabels.title}</h2>
           <p className={styles.subtitle}>
-            Наш штучний інтелект знає про все, що потрібно на сайті
-          </p>
+            {chatLabels.subtitle}          </p>
         </div>
 
         <div className={styles.chatBox}>
@@ -115,8 +115,8 @@ export const ChatBot: React.FC = () => {
             )}
             {isLoading && (
               <div className={styles.botMessageRow}>
-                <div className={styles.avatar}>P</div>
-                <div className={styles.loadingBubble}>Думаю...</div>
+                <div className={styles.avatar}>{chatLabels.botAvatar}</div>
+                <div className={styles.loadingBubble}>{chatLabels.loadingText}</div>
               </div>
             )}
           </div>
@@ -130,14 +130,14 @@ export const ChatBot: React.FC = () => {
                 event.key === 'Enter' && handleSendMessage()
               }
               disabled={isLoading}
-              placeholder="Введіть ваше запитання..."
+              placeholder={chatLabels.inputPlaceholder}
               className={styles.inputField}
             />
             <Button
               onClick={handleSendMessage}
               disabled={isLoading || !input.trim()}
               className={styles.sendButton}>
-              Надіслати
+              {chatLabels.sendButton}
             </Button>
           </div>
         </div>

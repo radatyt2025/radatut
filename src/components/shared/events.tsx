@@ -8,6 +8,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
+import { eventsData } from '@/constants/home/events';
 import styles from '@/css/events.module.css';
 
 interface EventData {
@@ -42,8 +43,8 @@ export const Events: React.FC = () => {
     <section className={styles.section}>
       <div className={styles.container}>
         <div className={styles.header}>
-          <h2 className={styles.title}>ПОДІЇ</h2>
-          <Button variant="outline">Детальніше</Button>
+          <h2 className={styles.title}>{eventsData.sectionTitle}</h2>
+          <Button variant="outline">{eventsData.moreButton}</Button>
         </div>
 
         <div className={styles.sliderContainer}>
@@ -69,7 +70,7 @@ export const Events: React.FC = () => {
                         </p>
                       </div>
                       <Button className={styles.registerButton}>
-                        Зареєструватися
+                        {eventsData.registerButton}
                       </Button>
                     </div>
                   </div>

@@ -1,0 +1,172 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 40px 20px;
+  width: 100%;
+  box-sizing: border-box;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+}
+
+.header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.greeting {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--primary);
+  margin: 0;
+}
+
+.role {
+  font-size: 18px;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.card {
+  border: 1px solid #e4ecf7;
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  min-height: 200px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.cardTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  color: #1a1a1a;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.listItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.itemTitle {
+  font-size: 16px;
+  color: #333;
+}
+
+.status,
+.date {
+  font-size: 16px;
+  white-space: nowrap;
+}
+
+.statusProgress {
+  color: #92e3a9;
+}
+
+.statusPlanned {
+  color: #a3c4ff;
+}
+
+.statusOverdue {
+  color: #ffb3b3;
+}
+
+.date {
+  color: #a3c4ff;
+}
+
+.emptyState {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  color: #a3c4ff;
+  font-size: 16px;
+}
+
+.docItemWrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.docIcon {
+  width: 20px;
+  height: 20px;
+  color: #1a1a1a;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.logoutButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  font-size: 18px;
+  font-weight: 500;
+  color: #1a1a1a;
+  cursor: pointer;
+  padding: 8px 16px;
+  font-family: inherit;
+  transition: opacity 0.2s;
+}
+
+.logoutButton:hover {
+  opacity: 0.7;
+}
+
+.logoutIcon {
+  width: 20px;
+  height: 20px;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
