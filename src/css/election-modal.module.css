@@ -1,0 +1,364 @@
+/* Overlay and positioning */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  overflow-y: auto;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.backButton {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background-color: #f2f4fb;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: var(--primary, #0026ff);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+  z-index: 1001;
+}
+
+.backButton:hover {
+  transform: scale(1.05);
+}
+
+.backButton svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Main Modal Content */
+.modalContent {
+  background-color: #f2f4fb;
+  border-radius: 24px;
+  width: 100%;
+  max-width: 900px;
+  padding: 24px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin: auto;
+}
+
+/* Header Section */
+.header {
+  display: flex;
+  gap: 32px;
+  margin-bottom: 48px;
+}
+
+.mainImageWrapper {
+  flex: 0 0 350px;
+  height: 220px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.mainImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.headerInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.mainTitle {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--primary, #0026ff);
+  margin: 0 0 8px 0;
+  line-height: 1.2;
+}
+
+.date {
+  font-size: 20px;
+  font-weight: 500;
+  color: #1a1a1a;
+  margin: 0 0 16px 0;
+}
+
+.description {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333333;
+  margin: 0;
+}
+
+/* Common Section */
+.sectionTitle {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--primary, #0026ff);
+  text-align: center;
+  margin: 0 0 40px 0;
+}
+
+/* Candidates Section (Step 1 & 3) */
+.candidatesGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 48px;
+  margin-bottom: 48px;
+}
+
+.candidateCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.candidateImageWrapper {
+  width: 200px;
+  height: 200px;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.candidateImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.candidateName {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 4px 0;
+}
+
+.candidateRole {
+  font-size: 16px;
+  font-weight: 500;
+  color: #1a1a1a;
+  margin: 0 0 16px 0;
+}
+
+.candidateDesc {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333333;
+  margin: 0 0 24px 0;
+  max-width: 300px;
+}
+
+.presentationLink {
+  color: var(--primary, #0026ff);
+  font-size: 16px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.presentationLink:hover {
+  text-decoration: none;
+}
+
+/* Selectable Cards (Step 3) */
+.selectableCard {
+  border: 2px solid transparent;
+  border-radius: 24px;
+  padding: 24px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.selectableCardActive {
+  border-color: var(--primary, #0026ff);
+  background-color: rgba(0, 38, 255, 0.02);
+}
+
+.selectButton {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 32px;
+  border-radius: 24px;
+  border: 1px solid var(--primary, #0026ff);
+  background-color: transparent;
+  color: var(--primary, #0026ff);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: auto;
+  transition: background-color 0.2s;
+}
+
+.selectButtonActive {
+  background-color: rgba(0, 38, 255, 0.1);
+}
+
+.radioCircle {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--primary, #0026ff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.radioCircleInner {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--primary, #0026ff);
+  display: none;
+}
+
+.selectButtonActive .radioCircleInner {
+  display: block;
+}
+
+/* Form Section (Step 2) */
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 450px;
+  margin: 0 auto 48px auto;
+  width: 100%;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--primary, #0026ff);
+}
+
+.input {
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 38, 255, 0.2);
+  background-color: transparent;
+  font-size: 16px;
+  color: #1a1a1a;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+
+.input:focus {
+  border-color: var(--primary, #0026ff);
+}
+
+/* Footer Section */
+.footer {
+  display: flex;
+  justify-content: flex-end; /* Pushes the button to the right */
+  align-items: center;
+  position: relative; /* Allows the pagination to be absolutely centered */
+  width: 100%;
+  min-height: 50px; /* Ensures footer has height even with absolute children */
+  margin-top: 24px;
+}
+
+.primaryButton {
+  background-color: var(--primary, #0026ff);
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 24px; /* Reduced from 14px 40px */
+  font-size: 15px;    /* Slightly reduced from 16px */
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  font-family: inherit;
+}
+
+.primaryButton:hover {
+  opacity: 0.9;
+}
+
+.pagination {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%); /* Perfectly centers the block */
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.pageActive {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--primary, #0026ff);
+  cursor: pointer;
+}
+
+.pageNumber {
+  font-size: 18px;
+  font-weight: 500;
+  color: #999999;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.pageNumber:hover {
+  color: #666666;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .header {
+    flex-direction: column;
+  }
+  
+  .mainImageWrapper {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+
+  .backButton {
+    top: 20px;
+    left: 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer {
+    flex-direction: column-reverse;
+    justify-content: center;
+    gap: 24px;
+  }
+  
+  .pagination {
+    position: static; /* Removes absolute positioning on small screens */
+    transform: none;
+  }
+  
+  .primaryButton {
+    width: 100%;
+  }
+}

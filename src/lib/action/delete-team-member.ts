@@ -4,11 +4,11 @@ import { eq } from 'drizzle-orm';
 import { revalidatePath } from 'next/cache';
 
 import { db } from '../../../drizzle/drizzle-client';
-import { team } from '../../../drizzle/schema.drizzle';
+import { users } from '../../../drizzle/schema.drizzle';
 
 export async function deleteTeamMember(id: string) {
   try {
-    await db.delete(team).where(eq(team.id, id));
+    await db.delete(users).where(eq(users.id, id));
 
     revalidatePath('/');
     revalidatePath('/team');

@@ -2,7 +2,8 @@ export const officeLabels = {
   loading: 'Завантаження...',
   greeting: 'Вітаємо',
   adminPrefix: 'адмін',
-  rolePrefix: 'Твоя роль:',
+  rolePrefix: 'Твоя роль: ',
+  teamPrefix: 'Команда: ',
   logout: 'Вийти',
   emptyUpdates: 'Немає оновлень',
   cards: {

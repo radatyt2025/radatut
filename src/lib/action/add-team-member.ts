@@ -1,11 +1,16 @@
 'use server';
 
+import type { InferInsertModel } from 'drizzle-orm';
+
 import { Storage } from '@google-cloud/storage';
+import { hash } from 'bcrypt';
 import { eq } from 'drizzle-orm';
 import { revalidatePath } from 'next/cache';
 
 import { db } from '../../../drizzle/drizzle-client';
-import { team } from '../../../drizzle/schema.drizzle';
+import { Team, users } from '../../../drizzle/schema.drizzle';
+
+type NewUser = InferInsertModel<typeof users>;
 
 const storage = new Storage({
   projectId: process.env.GCS_PROJECT_ID,
@@ -19,8 +24,15 @@ const BUCKET_NAME = process.env.GCS_BUCKET_NAME!;
 
 type AddTeamMemberPayload = {
   fullName: string;
-  role: string;
+  email: string;
+  password: string;
+  role: 'USER' | 'ADMIN';
+  team: Team;
   imageFile: File;
+
+  telegramLink?: string;
+  instagramLink?: string;
+  description?: string;
 };
 
 type AddTeamMemberResponse = {
@@ -35,8 +47,8 @@ export async function addTeamMember(
   try {
     const [isMemberExist] = await db
       .select()
-      .from(team)
-      .where(eq(team.fullName, payload.fullName))
+      .from(users)
+      .where(eq(users.fullName, payload.fullName))
       .limit(1);
 
     if (isMemberExist) {
@@ -61,13 +73,22 @@ export async function addTeamMember(
       resumable: false,
     });
 
-    const imageSrc = `https://storage.googleapis.com/${BUCKET_NAME}/${file.name}`;
+    const imageUrl = `https://storage.googleapis.com/${BUCKET_NAME}/${file.name}`;
 
-    await db.insert(team).values({
+    const newUser: NewUser = {
       fullName: payload.fullName,
+      email: payload.email,
+      password: await hash(payload.password, 10),
       role: payload.role,
-      imageSrc,
-    });
+      team: payload.team,
+      imageUrl,
+      telegramLink: payload.telegramLink ?? '',
+      instagramLink: payload.instagramLink ?? '',
+      description: payload.description ?? '',
+      provider: 'credentials',
+    };
+
+    await db.insert(users).values(newUser);
 
     revalidatePath('/');
     revalidatePath('/team');

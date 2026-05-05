@@ -1,8 +1,11 @@
-import { InferSelectModel } from 'drizzle-orm';
 import { pgEnum, pgTable, text, uuid } from 'drizzle-orm/pg-core';
 
-export const userRoleEnum = pgEnum('user_role', ['CLIENT', 'ADMIN']);
-export type UserRole = InferSelectModel<typeof users>['role'];
+export type UserRole = 'USER' | 'ADMIN';
+export type Team = 'Медіа' | 'Управління';
+export type Provider = 'google' | 'github' | 'credentials';
+
+export const userRoleEnum = pgEnum('user_role', ['USER', 'ADMIN']);
+export const teamEnum = pgEnum('team', ['Медіа', 'Управління']);
 export const providerEnum = pgEnum('provider', [
   'google',
   'github',
@@ -11,18 +14,14 @@ export const providerEnum = pgEnum('provider', [
 
 export const users = pgTable('users', {
   id: uuid('id').primaryKey().defaultRandom(),
-  email: text('email').unique(),
-  password: text('password'),
-  fullName: text('full_name'),
-  image: text('image'),
-  role: userRoleEnum('role').default('CLIENT'),
-  provider: providerEnum('provider'),
-  providerId: text('provider_id'),
-});
-
-export const team = pgTable('team', {
-  id: uuid('id').primaryKey().defaultRandom(),
-  fullName: text('full_name').unique().notNull(),
-  role: text('role').notNull(),
-  imageSrc: text('image_src').notNull(),
+  email: text('email').unique().notNull(),
+  password: text('password').notNull(),
+  fullName: text('full_name').notNull(),
+  imageUrl: text('image_url').notNull(),
+  role: userRoleEnum('role').notNull(),
+  team: teamEnum('team').notNull(),
+  telegramLink: text('telegram_link').notNull(),
+  instagramLink: text('instagram_link').notNull(),
+  description: text('description').notNull(),
+  provider: providerEnum('provider').notNull(),
 });

@@ -6,7 +6,7 @@ import { Container } from '@/components/shared/container';
 import { officeLabels } from '@/constants/office/office';
 import styles from '@/css/office/office.module.css';
 
-type UserRole = 'CLIENT' | 'ADMIN';
+type UserRole = 'USER' | 'ADMIN';
 
 export default function Office() {
   const { data: session, status } = useSession();
@@ -21,7 +21,7 @@ export default function Office() {
     switch (role) {
       case 'ADMIN':
         return 'Адміністратор';
-      case 'CLIENT':
+      case 'USER':
         return 'Клієнт';
       default:
         return 'Гість';
@@ -64,8 +64,9 @@ export default function Office() {
     );
   }
 
-  const userName = session?.user?.name || 'Користувач';
+  const userName = session?.user?.fullName || 'Користувач';
   const userRole = session?.user?.role;
+  const userTeam = session?.user?.team;
   const isAdmin = userRole === 'ADMIN';
 
   return (
@@ -73,12 +74,20 @@ export default function Office() {
       <div className={styles.wrapper}>
         <div className={styles.header}>
           <h1 className={styles.greeting}>
-            {officeLabels.greeting}, {isAdmin ? officeLabels.adminPrefix : ''}
+            {officeLabels.greeting},{' '}
+            {isAdmin ? officeLabels.adminPrefix + ' ' : ''}
             {userName}! 👋
           </h1>
-          <p className={styles.role}>
-            {officeLabels.rolePrefix}: <strong>{getRoleLabel(userRole)}</strong>
-          </p>
+          <div className={styles.userRoles}>
+            <p className={styles.role}>
+              {officeLabels.rolePrefix}{' '}
+              <strong>{getRoleLabel(userRole)}</strong>
+            </p>
+            <p className={styles.role}>
+              {officeLabels.teamPrefix}{' '}
+              <strong>{userTeam}</strong>
+            </p>
+          </div>
         </div>
 
         <div className={styles.grid}>
@@ -142,6 +151,18 @@ export default function Office() {
             </ul>
           </div>
         </div>
+
+        {isAdmin && (
+          <div className={styles.card}>
+            <div className={styles.cardHeader}>
+              <h2 className={styles.cardTitle}>{officeLabels.cards.updates}</h2>
+              <ArrowIcon />
+            </div>
+            <div className={styles.emptyState}>
+              <p>{officeLabels.cards.docs}</p>
+            </div>
+          </div>
+        )}
 
         <div className={styles.footer}>
           <button className={styles.logoutButton} onClick={handleLogOut}>

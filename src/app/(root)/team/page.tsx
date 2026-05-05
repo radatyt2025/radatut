@@ -1,5 +1,7 @@
 import { Instagram, Send } from 'lucide-react';
+import Link from 'next/link';
 
+import { Button } from '@/components/ui/button';
 import styles from '@/css/team-page.module.css';
 import { getTeam } from '@/lib/get-team';
 
@@ -22,7 +24,7 @@ export default async function Team() {
             <div key={member.id} className={styles.card}>
               <div className={styles.imageWrapper}>
                 <img
-                  src={member.imageSrc}
+                  src={member.imageUrl}
                   alt={member.fullName}
                   className={styles.image}
                 />
@@ -64,13 +66,16 @@ export default async function Team() {
                 <div className={styles.descriptionWrapper}>
                   <p className={styles.description}>
                     Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry&apos;s
-                    standard dummy text ever since the 1500s
+                    typesetting industry. Lorem Ipsum has been the
+                    industry&apos;s standard dummy text ever since the 1500s
                   </p>
                 </div>
               </div>
             </div>
           ))}
+          <Button asChild>
+            <Link href="/dashboard/team-members">Додати Учасника</Link>
+          </Button>
         </div>
       </div>
     </section>

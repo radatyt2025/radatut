@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import * as React from 'react';
 
 import { Button } from '@/components/ui/button';
@@ -17,12 +18,14 @@ interface EventData {
   date: string;
   description: string;
   imageSrc: string;
+  href: string;
 }
 
 const mockEvents: EventData[] = [
   {
     id: 1,
     title: 'Андріївські Вечорниці',
+    href: '/election',
     date: '29.10.2025',
     description:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
@@ -31,6 +34,7 @@ const mockEvents: EventData[] = [
   {
     id: 2,
     title: 'День Студента',
+    href: '/election',
     date: '17.11.2025',
     description:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
@@ -69,8 +73,11 @@ export const Events: React.FC = () => {
                           {event.description}
                         </p>
                       </div>
-                      <Button className={styles.registerButton}>
-                        {eventsData.registerButton}
+
+                      <Button className={styles.registerButton} asChild>
+                        <Link href={event.href}>
+                          {eventsData.registerButton}
+                        </Link>
                       </Button>
                     </div>
                   </div>

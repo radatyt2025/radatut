@@ -46,11 +46,11 @@ export const Team: React.FC = async () => {
               {chunkedMembers.map((group, groupIndex) => (
                 <CarouselItem key={groupIndex} className={styles.carouselItem}>
                   <div className={styles.gridContainer}>
-                    {group.map(({ id, fullName, imageSrc, role }) => (
+                    {group.map(({ id, fullName, imageUrl, role }) => (
                       <Card key={id} className={styles.cardContainer}>
                         <CardContent className={styles.teamCard}>
                           <img
-                            src={imageSrc}
+                            src={imageUrl}
                             alt={fullName}
                             className={styles.image}
                           />

@@ -2,7 +2,6 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { signIn } from 'next-auth/react';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
@@ -76,12 +75,12 @@ export default function Login() {
                   render={({ field, fieldState }) => (
                     <Field>
                       <FieldLabel className={styles.fieldLabel}>
-                        Логін
+                        Пошта
                       </FieldLabel>
                       <Input
                         {...field}
                         className={styles.inputField}
-                        placeholder="Введіть логін.."
+                        placeholder="Введіть пошту.."
                       />
                       {fieldState.invalid && (
                         <FieldError errors={[fieldState.error]} />
@@ -118,41 +117,8 @@ export default function Login() {
                 Увійти
               </Button>
             </div>
-            <div className={styles.authSwitch}>
-              <span>Ще не маєте акаунту?</span>
-              <Link href="/register" className={styles.authLink}>
-                Зареєструватися
-              </Link>
-            </div>
           </form>
         </Card>
-
-        <div className={styles.socialContainer}>
-          <Button
-            variant="secondary"
-            onClick={() => signIn('github', { callbackUrl: '/' })}
-            className={styles.socialButton}>
-            <img
-              width={24}
-              height={24}
-              src="/images/git-hub.png"
-              alt="github"
-            />
-            GitHub
-          </Button>
-          <Button
-            variant="secondary"
-            onClick={() => signIn('google', { callbackUrl: '/' })}
-            className={styles.socialButton}>
-            <img
-              width={24}
-              height={24}
-              src="/images/google.svg"
-              alt="google"
-            />
-            Google
-          </Button>
-        </div>
       </div>
     </section>
   );
