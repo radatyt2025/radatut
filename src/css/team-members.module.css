@@ -1,6 +1,4 @@
-/* =========================================
-   Layout & Container
-   ========================================= */
+
 .section {
   display: flex;
   justify-content: center;
@@ -19,9 +17,6 @@
   text-align: center;
 }
 
-/* =========================================
-   Typography
-   ========================================= */
 .mainHeading {
   font-family: var(--ukrainian-font, system-ui, -apple-system, sans-serif);
   color: #002aff;
@@ -38,9 +33,6 @@
   margin-bottom: 2rem;
 }
 
-/* =========================================
-   Form Layout
-   ========================================= */
 .formCard {
   background: transparent;
   border: none;
@@ -66,9 +58,6 @@
   margin-bottom: 8px;
 }
 
-/* =========================================
-   Inputs (Text, Select, File, Textarea)
-   ========================================= */
 .inputField {
   background-color: #f9f9f9;
   border: 1px solid #d1dbff;
@@ -153,9 +142,6 @@
   box-shadow: 0 0 0 2px rgba(0, 42, 255, 0.1);
 }
 
-/* =========================================
-   Image Preview
-   ========================================= */
 .imagePreviewContainer {
   margin-top: 16px;
   display: flex;
@@ -171,9 +157,6 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-/* =========================================
-   Buttons & Social Links
-   ========================================= */
 .submitContainer {
   display: flex;
   justify-content: center;
@@ -247,9 +230,6 @@
   text-decoration: underline;
 }
 
-/* =========================================
-   Carousel & Grid Layout
-   ========================================= */
 .carouselWrapper {
   width: 100%;
 }
@@ -277,9 +257,6 @@
   box-sizing: border-box;
 }
 
-/* =========================================
-   Team Cards
-   ========================================= */
 .cardContainer {
   border: none;
   background: transparent;
@@ -344,9 +321,6 @@
   opacity: 0.9;
 }
 
-/* =========================================
-   Controls (Carousel Arrows & Delete)
-   ========================================= */
 .controlsWrapper {
   display: flex;
   justify-content: center;
@@ -403,7 +377,7 @@
   transform: none;
 }
 
-/* Fix for Select dropdown transparency */
+
 .selectContent {
   background-color: #ffffff;
   border: 1px solid #d1dbff;
@@ -417,7 +391,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  /* The 40px left padding makes room for the checkmark! */
+
   padding: 12px 16px 12px 40px !important; 
   font-size: 1rem;
   color: #333;
@@ -433,9 +407,6 @@
   color: #002aff;
 }
 
-/* =========================================
-   Responsive Adjustments
-   ========================================= */
 @media (max-width: 1024px) {
   .gridContainer {
     grid-template-columns: repeat(3, 1fr);

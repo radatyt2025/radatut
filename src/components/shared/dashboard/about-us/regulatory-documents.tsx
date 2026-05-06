@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from '@/css/about-us/regulatory-documents.module.css';
 
-import { Container } from '../container';
+import { Container } from '../../container';
 
 const documentsData = [
   { 
@@ -10,7 +10,7 @@ const documentsData = [
     title: 'Положення про студентське самоврядування', 
     url: '#' 
   }
-  // Add more documents here as needed
+  
 ];
 
 export const RegulatoryDocuments: React.FC = () => {

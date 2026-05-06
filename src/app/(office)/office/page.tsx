@@ -1,6 +1,7 @@
 'use client';
 
 import { signOut, useSession } from 'next-auth/react';
+import Link from 'next/link';
 
 import { Container } from '@/components/shared/container';
 import { officeLabels } from '@/constants/office/office';
@@ -155,11 +156,11 @@ export default function Office() {
         {isAdmin && (
           <div className={styles.card}>
             <div className={styles.cardHeader}>
-              <h2 className={styles.cardTitle}>{officeLabels.cards.updates}</h2>
+              <h2 className={styles.cardTitle}>{officeLabels.cards.elections}</h2>
               <ArrowIcon />
             </div>
             <div className={styles.emptyState}>
-              <p>{officeLabels.cards.docs}</p>
+              <Link href='/dashboard/elections'>Перейти до виборів</Link>
             </div>
           </div>
         )}
