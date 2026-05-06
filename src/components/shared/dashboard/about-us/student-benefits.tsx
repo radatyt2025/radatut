@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from '@/css/about-us/student-benefits.module.css';
 
-import { Container } from '../container';
+import { Container } from '../../container';
 
 const benefitCards = [
   { id: 1, text: 'Знайти нові знайомства та контакти' },

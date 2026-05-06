@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from '@/css/about-us/achievements.module.css';
 
-import { Container } from '../container';
+import { Container } from '../../container';
 
 const achievementsData = [
   { id: 1, title: 'МЕРЧ', description: 'створили власний брендований мерч, який об’єднує студентів' },

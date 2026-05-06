@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from '@/css/about-us/about-us-section.module.css';
 
-import { Container } from '../container';
+import { Container } from '../../container';
 
 export const AboutUsSection: React.FC = () => {
   return (

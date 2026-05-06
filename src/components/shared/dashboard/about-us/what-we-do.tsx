@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from '@/css/about-us/what-we-do.module.css';
 
-import { Container } from '../container';
+import { Container } from '../../container';
 
 export const WhatWeDo: React.FC = () => {
   const cardsData = [
