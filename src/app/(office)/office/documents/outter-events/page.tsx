@@ -27,7 +27,6 @@ export default async function Documents() {
   return (
     <Container>
       <div className={styles.wrapper}>
-        {/* New Top Navigation Section */}
         <div className={styles.topNav}>
           <div className={styles.navLinks}>
             <span className={styles.activeLink}>Внутрішні події</span>
