@@ -85,8 +85,7 @@ export default function Office() {
               <strong>{getRoleLabel(userRole)}</strong>
             </p>
             <p className={styles.role}>
-              {officeLabels.teamPrefix}{' '}
-              <strong>{userTeam}</strong>
+              {officeLabels.teamPrefix} <strong>{userTeam}</strong>
             </p>
           </div>
         </div>
@@ -145,7 +144,9 @@ export default function Office() {
                 <li key={doc.id} className={styles.listItem}>
                   <div className={styles.docItemWrapper}>
                     <DocIcon />
-                    <span className={styles.itemTitle}>{doc.title}</span>
+                    <Link href="/office/documents/outter-events">
+                      <span className={styles.itemTitle}>{doc.title}</span>
+                    </Link>
                   </div>
                 </li>
               ))}
@@ -156,11 +157,13 @@ export default function Office() {
         {isAdmin && (
           <div className={styles.card}>
             <div className={styles.cardHeader}>
-              <h2 className={styles.cardTitle}>{officeLabels.cards.elections}</h2>
+              <h2 className={styles.cardTitle}>
+                {officeLabels.cards.elections}
+              </h2>
               <ArrowIcon />
             </div>
             <div className={styles.emptyState}>
-              <Link href='/dashboard/elections'>Перейти до виборів</Link>
+              <Link href="/dashboard/elections">Перейти до виборів</Link>
             </div>
           </div>
         )}

@@ -30,7 +30,6 @@ export const authOptions: AuthOptions = {
 
         if (!isPasswordValid) return null;
 
-        // гарантія для TS + runtime safety
         if (
           !user.email ||
           !user.fullName ||

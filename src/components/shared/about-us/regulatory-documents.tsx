@@ -10,7 +10,6 @@ const documentsData = [
     title: 'Положення про студентське самоврядування', 
     url: '#' 
   }
-  // Add more documents here as needed
 ];
 
 export const RegulatoryDocuments: React.FC = () => {

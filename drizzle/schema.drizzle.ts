@@ -68,8 +68,6 @@ export const votes = pgTable('votes', {
   createdAt: timestamp('created_at').defaultNow().notNull(),
 });
 
-
-
 export const electionsRelations = relations(elections, ({ many }) => ({
   candidates: many(candidates),
   votes: many(votes),
@@ -93,7 +91,15 @@ export const votesRelations = relations(votes, ({ one }) => ({
   }),
 }));
 
-
 export const validStudentTickets = pgTable('valid_student_tickets', {
   ticketNumber: text('ticket_number').primaryKey(),
+});
+
+export const events = pgTable('events', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  title: text('title').unique().notNull(),
+  date: text('date').notNull(),
+  description: text('description').notNull(),
+  imageUrl: text('image_url').notNull(),
+  href: userRoleEnum('href').notNull(),
 });

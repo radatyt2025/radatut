@@ -10,7 +10,7 @@ export const officeLabels = {
     tasks: 'Мої задачі',
     events: 'Найближчі події',
     updates: 'Останні оновлення',
-    docs: 'Останні документи',
+    docs: 'Документи',
     elections: 'Вибори',
   },
 };
