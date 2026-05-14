@@ -9,6 +9,7 @@
     "lint": "eslint",
     "lint:fix": "eslint . --fix",
     "db:push": "drizzle-kit push",
+    "db:generate": "drizzle-kit generate",
     "db:seed": "dotenv -e .env -- npx tsx drizzle/seed.ts",
     "prepare": "husky"
   },

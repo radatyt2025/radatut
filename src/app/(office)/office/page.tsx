@@ -144,7 +144,7 @@ export default function Office() {
                 <li key={doc.id} className={styles.listItem}>
                   <div className={styles.docItemWrapper}>
                     <DocIcon />
-                    <Link href="/office/documents/outter-events">
+                    <Link href="/office/events">
                       <span className={styles.itemTitle}>{doc.title}</span>
                     </Link>
                   </div>

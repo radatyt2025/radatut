@@ -95,11 +95,14 @@ export const validStudentTickets = pgTable('valid_student_tickets', {
   ticketNumber: text('ticket_number').primaryKey(),
 });
 
+export const eventTypeEnum = pgEnum('event_type', ['INTERNAL', 'EXTERNAL']);
+
 export const events = pgTable('events', {
   id: uuid('id').primaryKey().defaultRandom(),
-  title: text('title').unique().notNull(),
+  title: text('title').notNull(),
   date: text('date').notNull(),
+  time: text('time'),
   description: text('description').notNull(),
   imageUrl: text('image_url').notNull(),
-  href: userRoleEnum('href').notNull(),
+  type: eventTypeEnum('type').default('INTERNAL').notNull(),
 });
