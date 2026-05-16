@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import * as React from 'react';
 
 import { Button } from '@/components/ui/button';
@@ -11,38 +10,10 @@ import {
 } from '@/components/ui/carousel';
 import { eventsData } from '@/constants/home/events';
 import styles from '@/css/events.module.css';
+import { getEvents } from '@/lib/action/events';
 
-interface EventData {
-  id: number;
-  title: string;
-  date: string;
-  description: string;
-  imageSrc: string;
-  href: string;
-}
-
-const mockEvents: EventData[] = [
-  {
-    id: 1,
-    title: 'Андріївські Вечорниці',
-    href: '/election',
-    date: '29.10.2025',
-    description:
-      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
-    imageSrc: '/images/events.png',
-  },
-  {
-    id: 2,
-    title: 'День Студента',
-    href: '/election',
-    date: '17.11.2025',
-    description:
-      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
-    imageSrc: '/images/events.png',
-  },
-];
-
-export const Events: React.FC = () => {
+export const Events: React.FC = async () => {
+  const events = await getEvents();
   return (
     <section className={styles.section}>
       <div className={styles.container}>
@@ -54,12 +25,12 @@ export const Events: React.FC = () => {
         <div className={styles.sliderContainer}>
           <Carousel opts={{ align: 'start' }} className="w-full">
             <CarouselContent>
-              {mockEvents.map((event) => (
+              {events.map((event) => (
                 <CarouselItem key={event.id} className="basis-full">
                   <div className={styles.card}>
                     <div className={styles.imageWrapper}>
                       <img
-                        src={event.imageSrc}
+                        src={event.imageUrl}
                         alt={event.title}
                         className={styles.image}
                       />
@@ -73,12 +44,13 @@ export const Events: React.FC = () => {
                           {event.description}
                         </p>
                       </div>
-
-                      <Button className={styles.registerButton} asChild>
-                        <Link href={event.href}>
-                          {eventsData.registerButton}
-                        </Link>
-                      </Button>
+                      {event.link && (
+                        <Button className={styles.registerButton} asChild>
+                          <a target="_blank" href={event.link}>
+                            {eventsData.registerButton}
+                          </a>
+                        </Button>
+                      )}
                     </div>
                   </div>
                 </CarouselItem>

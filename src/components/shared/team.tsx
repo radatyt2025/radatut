@@ -46,7 +46,7 @@ export const Team: React.FC = async () => {
               {chunkedMembers.map((group, groupIndex) => (
                 <CarouselItem key={groupIndex} className={styles.carouselItem}>
                   <div className={styles.gridContainer}>
-                    {group.map(({ id, fullName, imageUrl, role }) => (
+                    {group.map(({ id, fullName, imageUrl, position }) => (
                       <Card key={id} className={styles.cardContainer}>
                         <CardContent className={styles.teamCard}>
                           <img
@@ -57,7 +57,7 @@ export const Team: React.FC = async () => {
                           <div className={styles.gradientOverlay} />
                           <div className={styles.cardContentOverlay}>
                             <h3 className={styles.memberName}>{fullName}</h3>
-                            <p className={styles.memberRole}>{role}</p>
+                            <p className={styles.memberRole}>{position}</p>
                           </div>
                         </CardContent>
                       </Card>

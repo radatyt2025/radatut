@@ -20,10 +20,11 @@ const BUCKET_NAME = process.env.GCS_BUCKET_NAME!;
 export type CreateEventPayload = {
   title: string;
   date: string;
-  time?: string | null;
+  time: string;
   description: string;
-  type: 'INTERNAL' | 'EXTERNAL' | 'ELECTION';
+  type: 'INTERNAL' | 'EXTERNAL';
   imageFile: File;
+  link: string | null;
 };
 
 export async function createEvent(payload: CreateEventPayload) {
@@ -32,7 +33,7 @@ export async function createEvent(payload: CreateEventPayload) {
     const buffer = Buffer.from(arrayBuffer);
 
     const sanitizedFilename = payload.imageFile.name.replace(/\s+/g, '-');
-    const uniqueFilename = `events/${Date.now()}-${sanitizedFilename}`; 
+    const uniqueFilename = `events/${Date.now()}-${sanitizedFilename}`;
 
     const bucket = storage.bucket(BUCKET_NAME);
     const file = bucket.file(uniqueFilename);
@@ -47,20 +48,17 @@ export async function createEvent(payload: CreateEventPayload) {
     const newEvent = {
       title: payload.title,
       date: payload.date,
-      time: payload.time ?? null, 
+      time: payload.time,
       description: payload.description,
       type: payload.type as 'INTERNAL' | 'EXTERNAL',
-      imageUrl: imageUrl, 
+      imageUrl: imageUrl,
+      link: payload.link,
     };
 
     await db.insert(events).values(newEvent);
-
-    await db.insert(events).values(newEvent);
     
-    revalidatePath('/profile'); 
-    revalidatePath('/events');
     revalidatePath('/office/events');
-    
+
     return { success: true, message: 'Подію успішно створено!' };
   } catch (error) {
     console.error('Create Event Error:', error);
@@ -80,13 +78,10 @@ export async function getEvents() {
 
 export async function deleteEvent(id: string) {
   try {
-    
     await db.delete(events).where(eq(events.id, id));
-    
-    revalidatePath('/profile');
-    revalidatePath('/events');
+
     revalidatePath('/office/events');
-    
+
     return { success: true, message: 'Подію видалено' };
   } catch (error) {
     console.error('Delete Event Error:', error);

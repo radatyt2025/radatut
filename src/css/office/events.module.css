@@ -4,18 +4,31 @@
   gap: 32px;
   padding: 40px 20px;
   width: 100%;
-  max-width: 1000px; /* Limits width to match the screenshots */
+  max-width: 1000px; 
   margin: 0 auto;
   box-sizing: border-box;
   font-family: system-ui, -apple-system, sans-serif;
 }
 
-/* Header & Tabs */
+
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #e4ecf7; /* Light border under tabs */
+  border-bottom: 1px solid #e4ecf7; 
+  padding-bottom: 16px;
+}
+
+.headerCentered {
+  justify-content: center;
+}
+
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e4ecf7; 
   padding-bottom: 16px;
 }
 
@@ -28,34 +41,57 @@
   gap: 32px;
 }
 
+
 .tabActive,
 .tabInactive {
+  position: relative; 
   background: none;
   border: none;
   font-size: 16px;
+  font-weight: 500;
   font-family: inherit;
   cursor: pointer;
   padding: 0 0 16px 0;
-  margin-bottom: -17px; /* Pulls the border down to overlap the container border */
+  margin-bottom: -17px; 
+  color: #333333; 
+  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+
+.tabActive::after,
+.tabInactive::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #0026ff;
+  transform: scaleX(0); 
+  transform-origin: bottom left; 
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+.tabInactive:hover {
+  color: #0026ff;
+}
+
+.tabInactive:hover::after {
+  transform: scaleX(1); 
+}
+
 
 .tabActive {
   font-weight: 600;
-  color: #1a1a1a;
-  border-bottom: 2px solid #1a1a1a;
+  color: #0026ff;
 }
 
-.tabInactive {
-  font-weight: 500;
-  color: #666666;
-  border-bottom: 2px solid transparent;
+.tabActive::after {
+  transform: scaleX(1); 
 }
 
-.tabInactive:hover {
-  color: #1a1a1a;
-}
 
-/* Add Button */
 .addButton {
   background-color: var(--primary, #0026ff);
   color: #ffffff;
@@ -73,7 +109,7 @@
   opacity: 0.9;
 }
 
-/* Event List */
+
 .list {
   display: flex;
   flex-direction: column;
@@ -87,7 +123,7 @@
   padding: 40px 0;
 }
 
-/* Event Card */
+
 .card {
   background-color: #f2f4fb;
   border-radius: 16px;
@@ -126,7 +162,7 @@
   background-color: transparent;
 }
 
-/* Admin Actions */
+
 .adminActions {
   display: flex;
   gap: 12px;
@@ -155,7 +191,7 @@
   height: 18px;
 }
 
-/* Card Body */
+
 .date {
   font-size: 14px;
   color: #1a1a1a;
@@ -169,7 +205,7 @@
   margin: 0 0 24px 0;
 }
 
-/* Card Footer */
+
 .cardFooter {
   display: flex;
   justify-content: flex-end;
@@ -192,7 +228,7 @@
   background-color: rgba(0, 38, 255, 0.05);
 }
 
-/* Responsive */
+
 @media (max-width: 640px) {
   .header {
     flex-direction: column;
@@ -214,4 +250,56 @@
     align-items: flex-start;
     gap: 8px;
   }
+}
+
+
+.card {
+  background-color: #f2f4fb;
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: row; 
+  gap: 24px; 
+  align-items: flex-start;
+}
+
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  flex: 1; 
+}
+
+
+.imageWrapper {
+  flex: 0 0 260px; 
+  height: 180px;   
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #e4ecf7;
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+
+
+
+@media (max-width: 640px) {
+  .card {
+    flex-direction: column; 
+    padding: 16px;
+  }
+  
+  .imageWrapper {
+    flex: 0 0 auto;
+    width: 100%;
+    height: 200px;
+  }
+  
+  
 }

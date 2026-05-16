@@ -39,7 +39,7 @@ export default async function Team() {
                 <div className={styles.infoWrapper}>
                   <div className={styles.textGroup}>
                     <h2 className={styles.name}>{member.fullName}</h2>
-                    <p className={styles.role}>{member.role}</p>
+                    <p className={styles.role}>{member.position}</p>
                   </div>
 
                   <div className={styles.socials}>

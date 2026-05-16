@@ -35,7 +35,8 @@ export const authOptions: AuthOptions = {
           !user.fullName ||
           !user.imageUrl ||
           !user.role ||
-          !user.team
+          !user.team ||
+          !user.position
         ) {
           return null;
         }
@@ -47,6 +48,7 @@ export const authOptions: AuthOptions = {
           image: user.imageUrl,
           role: user.role,
           team: user.team,
+          position: user.position,
         };
       },
     }),
@@ -67,6 +69,7 @@ export const authOptions: AuthOptions = {
         token.image = user.image;
         token.role = user.role;
         token.team = user.team;
+        token.position = user.position;
       }
 
       return token;
@@ -80,6 +83,7 @@ export const authOptions: AuthOptions = {
         image: token.image as string,
         role: token.role as UserRole,
         team: token.team as Team,
+        position: token.position as string,
       };
 
       return session;

@@ -7,8 +7,6 @@ import { Container } from '@/components/shared/container';
 import { officeLabels } from '@/constants/office/office';
 import styles from '@/css/office/office.module.css';
 
-type UserRole = 'USER' | 'ADMIN';
-
 export default function Office() {
   const { data: session, status } = useSession();
 
@@ -16,17 +14,6 @@ export default function Office() {
     signOut({
       callbackUrl: '/',
     });
-  };
-
-  const getRoleLabel = (role?: UserRole) => {
-    switch (role) {
-      case 'ADMIN':
-        return 'Адміністратор';
-      case 'USER':
-        return 'Клієнт';
-      default:
-        return 'Гість';
-    }
   };
 
   const tasksData = [
@@ -82,7 +69,7 @@ export default function Office() {
           <div className={styles.userRoles}>
             <p className={styles.role}>
               {officeLabels.rolePrefix}{' '}
-              <strong>{getRoleLabel(userRole)}</strong>
+              <strong>{session?.user.position}</strong>
             </p>
             <p className={styles.role}>
               {officeLabels.teamPrefix} <strong>{userTeam}</strong>
@@ -126,16 +113,6 @@ export default function Office() {
 
           <div className={styles.card}>
             <div className={styles.cardHeader}>
-              <h2 className={styles.cardTitle}>{officeLabels.cards.updates}</h2>
-              <ArrowIcon />
-            </div>
-            <div className={styles.emptyState}>
-              <p>{officeLabels.cards.docs}</p>
-            </div>
-          </div>
-
-          <div className={styles.card}>
-            <div className={styles.cardHeader}>
               <h2 className={styles.cardTitle}>{officeLabels.cards.docs}</h2>
               <ArrowIcon />
             </div>
@@ -152,21 +129,42 @@ export default function Office() {
               ))}
             </ul>
           </div>
-        </div>
-
-        {isAdmin && (
           <div className={styles.card}>
             <div className={styles.cardHeader}>
-              <h2 className={styles.cardTitle}>
-                {officeLabels.cards.elections}
-              </h2>
+              <h2 className={styles.cardTitle}>{officeLabels.cards.updates}</h2>
               <ArrowIcon />
             </div>
             <div className={styles.emptyState}>
-              <Link href="/dashboard/elections">Перейти до виборів</Link>
+              <p>{officeLabels.cards.docs}</p>
             </div>
           </div>
-        )}
+          {isAdmin && (
+            <>
+              <div className={styles.card}>
+                <div className={styles.cardHeader}>
+                  <h2 className={styles.cardTitle}>
+                    {officeLabels.cards.elections}
+                  </h2>
+                  <ArrowIcon />
+                </div>
+                <div className={styles.emptyState}>
+                  <Link href="/dashboard/elections">Перейти до виборів</Link>
+                </div>
+              </div>
+              <div className={styles.card}>
+                <div className={styles.cardHeader}>
+                  <h2 className={styles.cardTitle}>
+                    {officeLabels.cards.eventsManagement}
+                  </h2>
+                  <ArrowIcon />
+                </div>
+                <div className={styles.emptyState}>
+                  <Link href="/office/events">Керування подіями</Link>
+                </div>
+              </div>
+            </>
+          )}
+        </div>
 
         <div className={styles.footer}>
           <button className={styles.logoutButton} onClick={handleLogOut}>

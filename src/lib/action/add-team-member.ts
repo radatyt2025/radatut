@@ -90,8 +90,6 @@ export async function addTeamMember(
 
     await db.insert(users).values(newUser);
 
-    revalidatePath('/');
-    revalidatePath('/team');
     revalidatePath('/dashboard/team-members');
 
     return { success: true };

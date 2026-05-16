@@ -12,5 +12,6 @@ export const officeLabels = {
     updates: 'Останні оновлення',
     docs: 'Документи',
     elections: 'Вибори',
+    eventsManagement: 'Події',
   },
 };

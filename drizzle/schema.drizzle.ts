@@ -10,15 +10,11 @@ import {
 
 export type UserRole = 'USER' | 'ADMIN';
 export type Team = 'Медіа' | 'Управління';
-export type Provider = 'google' | 'github' | 'credentials';
+export type Provider = 'credentials';
 
 export const userRoleEnum = pgEnum('user_role', ['USER', 'ADMIN']);
 export const teamEnum = pgEnum('team', ['Медіа', 'Управління']);
-export const providerEnum = pgEnum('provider', [
-  'google',
-  'github',
-  'credentials',
-]);
+export const providerEnum = pgEnum('provider', ['credentials']);
 
 export const users = pgTable('users', {
   id: uuid('id').primaryKey().defaultRandom(),
@@ -27,6 +23,7 @@ export const users = pgTable('users', {
   fullName: text('full_name').notNull(),
   imageUrl: text('image_url').notNull(),
   role: userRoleEnum('role').notNull(),
+  position: text('position').notNull().default('помічник'),
   team: teamEnum('team').notNull(),
   telegramLink: text('telegram_link').notNull(),
   instagramLink: text('instagram_link').notNull(),
@@ -101,8 +98,9 @@ export const events = pgTable('events', {
   id: uuid('id').primaryKey().defaultRandom(),
   title: text('title').notNull(),
   date: text('date').notNull(),
-  time: text('time'),
+  time: text('time').notNull(),
   description: text('description').notNull(),
   imageUrl: text('image_url').notNull(),
   type: eventTypeEnum('type').default('INTERNAL').notNull(),
+  link: text('link'),
 });

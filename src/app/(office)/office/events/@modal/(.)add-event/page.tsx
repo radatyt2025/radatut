@@ -12,16 +12,19 @@ export default function AddEventModal() {
   const overlayRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isPending, startTransition] = useTransition();
-  
-  const [eventType, setEventType] = useState<'INTERNAL' | 'EXTERNAL' | 'ELECTION'>('INTERNAL');
-  
+
+  const [eventType, setEventType] = useState<'INTERNAL' | 'EXTERNAL'>(
+    'INTERNAL',
+  );
+
   const [formData, setFormData] = useState({
     title: '',
+    link: '',
     date: '',
     time: '',
     description: '',
   });
-  
+
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
@@ -45,7 +48,9 @@ export default function AddEventModal() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [router]);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
@@ -72,7 +77,7 @@ export default function AddEventModal() {
       const response = await createEvent({
         ...formData,
         type: eventType,
-        imageFile: imageFile, 
+        imageFile: imageFile,
       });
 
       if (response.success) {
@@ -85,52 +90,60 @@ export default function AddEventModal() {
   };
 
   return (
-    <div className={styles.overlay} ref={overlayRef} onClick={handleOverlayClick}>
+    <div
+      className={styles.overlay}
+      ref={overlayRef}
+      onClick={handleOverlayClick}>
       <div className={styles.modalContent}>
         <h2 className={styles.title}>Додавання події</h2>
-        
+
         <div className={styles.tabs}>
-          <button 
-            className={eventType === 'INTERNAL' ? styles.tabActive : styles.tabInactive}
+          <button
+            className={
+              eventType === 'INTERNAL' ? styles.tabActive : styles.tabInactive
+            }
             onClick={() => setEventType('INTERNAL')}
-            type="button"
-          >
+            type="button">
             Внутрішня подія
           </button>
-          <button 
-            className={eventType === 'EXTERNAL' ? styles.tabActive : styles.tabInactive}
+          <button
+            className={
+              eventType === 'EXTERNAL' ? styles.tabActive : styles.tabInactive
+            }
             onClick={() => setEventType('EXTERNAL')}
-            type="button"
-          >
+            type="button">
             Зовнішня подія
-          </button>
-          <button 
-            className={eventType === 'ELECTION' ? styles.tabActive : styles.tabInactive}
-            onClick={() => setEventType('ELECTION')}
-            type="button"
-          >
-            Вибори
           </button>
         </div>
 
         <div className={styles.formBody}>
           <div className={styles.topSection}>
             <div className={styles.imageUploadWrapper}>
-              <input 
-                type="file" 
-                accept="image/*" 
-                hidden 
-                ref={fileInputRef} 
-                onChange={handleFileChange} 
+              <input
+                type="file"
+                accept="image/*"
+                hidden
+                ref={fileInputRef}
+                onChange={handleFileChange}
               />
-              <button 
-                className={styles.imageUploadBox} 
+              <button
+                className={styles.imageUploadBox}
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                style={{ overflow: 'hidden', padding: previewUrl ? 0 : undefined }}
-              >
+                style={{
+                  overflow: 'hidden',
+                  padding: previewUrl ? 0 : undefined,
+                }}>
                 {previewUrl ? (
-                  <img src={previewUrl} alt="Preview" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  <img
+                    src={previewUrl}
+                    alt="Preview"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                    }}
+                  />
                 ) : (
                   <ImageIcon />
                 )}
@@ -140,35 +153,46 @@ export default function AddEventModal() {
             <div className={styles.topInputs}>
               <div className={styles.inputGroup}>
                 <label className={styles.label}>Назва події</label>
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   name="title"
-                  className={styles.input} 
-                  placeholder="Введіть назву..." 
+                  className={styles.input}
+                  placeholder="Введіть назву..."
                   value={formData.title}
                   onChange={handleInputChange}
                 />
               </div>
-              
+              <div className={styles.inputGroup}>
+                <label className={styles.label}>Посилання на подію</label>
+                <input
+                  type="text"
+                  name="link"
+                  className={styles.input}
+                  placeholder="Введіть посилання..."
+                  value={formData.link}
+                  onChange={handleInputChange}
+                />
+              </div>
+
               <div className={styles.rowInputs}>
                 <div className={styles.inputGroup}>
                   <label className={styles.label}>Дата</label>
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
                     name="date"
-                    className={styles.input} 
-                    placeholder="дд.мм.рррр" 
+                    className={styles.input}
+                    placeholder="дд.мм.рррр"
                     value={formData.date}
                     onChange={handleInputChange}
                   />
                 </div>
                 <div className={styles.inputGroup}>
                   <label className={styles.label}>Час</label>
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
                     name="time"
-                    className={styles.input} 
-                    placeholder="00-00" 
+                    className={styles.input}
+                    placeholder="00-00"
                     value={formData.time}
                     onChange={handleInputChange}
                   />
@@ -179,10 +203,10 @@ export default function AddEventModal() {
 
           <div className={styles.inputGroup}>
             <label className={styles.label}>Опис події</label>
-            <textarea 
+            <textarea
               name="description"
-              className={styles.textarea} 
-              placeholder="Введіть опис..." 
+              className={styles.textarea}
+              placeholder="Введіть опис..."
               value={formData.description}
               onChange={handleInputChange}
             />
@@ -190,12 +214,11 @@ export default function AddEventModal() {
         </div>
 
         <div className={styles.footer}>
-          <button 
-            className={styles.submitButton} 
+          <button
+            className={styles.submitButton}
             onClick={handleSubmit}
             disabled={isPending}
-            type="button"
-          >
+            type="button">
             {isPending ? 'Створення...' : 'Створити подію'}
           </button>
         </div>
@@ -205,7 +228,15 @@ export default function AddEventModal() {
 }
 
 const ImageIcon = () => (
-  <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#a3c4ff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    width="64"
+    height="64"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="#a3c4ff"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round">
     <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
     <circle cx="8.5" cy="8.5" r="1.5"></circle>
     <polyline points="21 15 16 10 5 21"></polyline>

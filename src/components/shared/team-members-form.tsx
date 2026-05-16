@@ -2,8 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import * as z from 'zod';
@@ -29,10 +28,11 @@ import { addTeamMember } from '@/lib/action/add-team-member';
 
 const TeamMemberFormSchema = z.object({
   fullName: z.string().min(1),
-  email: z.string().email(),
+  email: z.email(),
   password: z.string().min(6),
   role: z.enum(['USER', 'ADMIN']),
   team: z.enum(['Медіа', 'Управління']),
+  position: z.string().min(3),
   imageFile: z.instanceof(File),
 
   telegramLink: z.string().optional(),
@@ -43,6 +43,8 @@ const TeamMemberFormSchema = z.object({
 export const TeamMembersForm: React.FC = () => {
   const router = useRouter();
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  
+  const [fileName, setFileName] = useState<string>('Файл не обрано');
 
   const form = useForm<z.infer<typeof TeamMemberFormSchema>>({
     resolver: zodResolver(TeamMemberFormSchema),
@@ -52,6 +54,7 @@ export const TeamMembersForm: React.FC = () => {
       password: '',
       role: 'USER',
       team: 'Медіа',
+      position: '',
       telegramLink: '',
       instagramLink: '',
       description: '',
@@ -82,6 +85,7 @@ export const TeamMembersForm: React.FC = () => {
     toast.success('Успішно додано!');
     form.reset();
     setPreviewUrl(null);
+    setFileName('Файл не обрано');
     router.refresh();
   }
 
@@ -183,20 +187,26 @@ export const TeamMembersForm: React.FC = () => {
                   <FieldLabel className={styles.fieldLabel}>
                     Зображення
                   </FieldLabel>
-                  <Input
-                    type="file"
-                    accept="image/*"
-                    className={styles.fileInput}
-                    {...rest}
-                    onChange={(e) => {
-                      const file = e.target.files?.[0];
-                      if (file) {
-                        onChange(file);
-                        const newPreviewUrl = URL.createObjectURL(file);
-                        setPreviewUrl(newPreviewUrl);
-                      }
-                    }}
-                  />
+                  
+                  <label className={styles.fileWrapper}>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      style={{ display: 'none' }}
+                      {...rest}
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        if (file) {
+                          onChange(file);
+                          setFileName(file.name);
+                          const newPreviewUrl = URL.createObjectURL(file);
+                          setPreviewUrl(newPreviewUrl);
+                        }
+                      }}
+                    />
+                    <span className={styles.customFileBtn}>Оберіть файл</span>
+                    <span className={styles.fileName}>{fileName}</span>
+                  </label>
 
                   {previewUrl && (
                     <div className={styles.imagePreviewContainer}>
@@ -236,6 +246,26 @@ export const TeamMembersForm: React.FC = () => {
                       </SelectItem>
                     </SelectContent>
                   </Select>
+                  {fieldState.invalid && (
+                    <FieldError errors={[fieldState.error]} />
+                  )}
+                </Field>
+              )}
+            />
+
+            <Controller
+              name="position"
+              control={form.control}
+              render={({ field, fieldState }) => (
+                <Field>
+                  <FieldLabel className={styles.fieldLabel}>
+                    Посада
+                  </FieldLabel>
+                  <Input
+                    {...field}
+                    className={styles.inputField}
+                    placeholder="Посада"
+                  />
                   {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]} />
                   )}
@@ -287,7 +317,7 @@ export const TeamMembersForm: React.FC = () => {
               name="description"
               control={form.control}
               render={({ field, fieldState }) => (
-                <Field>
+                <Field className={styles.fullWidth}>
                   <FieldLabel className={styles.fieldLabel}>Опис</FieldLabel>
                   <textarea
                     {...field}
@@ -303,7 +333,7 @@ export const TeamMembersForm: React.FC = () => {
           </FieldGroup>
         </CardContent>
 
-        <div className={styles.submitContainer}>
+        <div className={`${styles.submitContainer} ${styles.fullWidth}`}>
           <Button type="submit" className={styles.submitButton}>
             Додати
           </Button>

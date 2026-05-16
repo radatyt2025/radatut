@@ -5,6 +5,7 @@ export type TeamMemberModel = {
   email: string;
   fullName: string;
   role: 'USER' | 'ADMIN';
+  position: string;
   imageUrl: string;
   team: Team;
   telegramLink?: string;
