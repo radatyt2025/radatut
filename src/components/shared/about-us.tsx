@@ -10,7 +10,7 @@ export const AboutUs: React.FC = () => {
         <div className={styles.contentWrapper}>
           <div className={styles.largeImageContainer}>
             <img
-              src="/images/about-us-main.png"
+              src="/images/home/about-us-main.png"
               alt="Студентська рада подія 1"
               className={styles.image}
             />
@@ -22,14 +22,14 @@ export const AboutUs: React.FC = () => {
             <div className={styles.smallImagesRow}>
               <div className={styles.smallImageContainer}>
                 <img
-                  src="/images/about-us-1.png"
+                  src="/images/home/about-us-side-1.png"
                   alt="Студентська рада подія 2"
                   className={styles.image}
                 />
               </div>
               <div className={styles.smallImageContainer}>
                 <img
-                  src="/images/about-us-2.png"
+                  src="/images/home/about-us-side-2.png"
                   alt="Студентська рада подія 3"
                   className={styles.image}
                 />

@@ -40,7 +40,7 @@ export const OurValues: React.FC = () => {
 
         <div className={styles.imageContainer}>
           <img
-            src="/images/about-us-5.jpg"
+            src="/images/about-us/our-values.png"
             alt="Наші цінності фон"
             className={styles.backgroundImage}
           />

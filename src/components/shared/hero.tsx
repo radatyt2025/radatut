@@ -9,7 +9,7 @@ export const Hero: React.FC = () => {
       <div className="container">
         <div className={styles.heroImageCard}>
           <Image
-            src="/images/hero.png"
+            src="/images/home/hero.png"
             alt="hero"
             fill
             priority

@@ -9,28 +9,28 @@ export const WhatWeDo: React.FC = () => {
     {
       id: 1,
       title: 'Організовуємо події',
-      imageSrc: '/images/about-us-4.jpg',
+      imageSrc: '/images/about-us/about-us-what-we-do-1.png',
       description:
         'Вечорниці, зустрічі, поїздки, благодійні ініціативи та студентські заходи, які об\'єднують людей.',
     },
     {
       id: 2,
       title: 'Розвиваємо ком\'юніті',
-      imageSrc: '/images/about-us-4.jpg',
+      imageSrc: '/images/about-us/about-us-what-we-do-2.png',
       description:
         'Створюємо середовище, де легко знайомитись, спілкуватись і знаходити однодумців.',
     },
     {
       id: 3,
       title: 'Представляємо студентів',
-      imageSrc: '/images/about-us-4.jpg',
+      imageSrc: '/images/about-us/about-us-what-we-do-3.png',
       description:
         'Комунікуємо з адміністрацією та захищаємо інтереси студентства.',
     },
     {
       id: 4,
       title: 'Співпрацюємо',
-      imageSrc: '/images/about-us-4.jpg',
+      imageSrc: '/images/about-us/about-us-what-we-do-4.png',
       description:
         'Працюємо з іншими студентськими організаціями, партнерами та міськими ініціативами.',
     },

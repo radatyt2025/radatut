@@ -10,12 +10,12 @@ import { Button } from '@/components/ui/button';
 import styles from '@/css/about-us-page.module.css';
 
 const galleryImages = [
-  { src: '/images/about-us-1.png' },
-  { src: '/images/about-us-2.png' },
-  { src: '/images/about-us-3.png' },
-  { src: '/images/about-us-3.png' },
-  { src: '/images/about-us-3.png' },
-  { src: '/images/about-us-3.png' },
+  { src: '/images/about-us/small-image-1.png' },
+  { src: '/images/about-us/small-image-2.png' },
+  { src: '/images/about-us/small-image-3.png' },
+  { src: '/images/about-us/small-image-4.png' },
+  { src: '/images/about-us/small-image-5.png' },
+  { src: '/images/about-us/small-image-6.png' },
 ];
 
 export default function AboutUs() {
@@ -41,7 +41,7 @@ export default function AboutUs() {
             <div className={styles.imageWrapper}>
               <div className={styles.mainCircle} />
               <img
-                src="/images/about-us-hero.png"
+                src="/images/about-us/hero.png"
                 alt="Команда студентської ради"
                 width={600}
                 height={400}
