@@ -1,8 +1,8 @@
 export const heroData = {
   title: 'Студентська рада\nIT СТЕП Університету',
-  subTitle: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+  subTitle: 'Команда студентів, яка розвиває університетське життя та створює можливості для студентів.',
   aboutSection: {
     title: 'ПРО НАС',
-    text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s'
+    text: 'Студентська рада ІТ СТЕП Університету — це активна спільнота студентів, які працюють над розвитком університетського середовища. Ми організовуємо події, підтримуємо студентські ініціативи, допомагаємо налагоджувати комунікацію між студентами та адміністрацією, а також створюємо простір, де кожен може проявити себе.'
   }
 };

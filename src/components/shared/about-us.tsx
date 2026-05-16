@@ -10,7 +10,7 @@ export const AboutUs: React.FC = () => {
         <div className={styles.contentWrapper}>
           <div className={styles.largeImageContainer}>
             <img
-              src="/images/hero.png"
+              src="/images/about-us-main.png"
               alt="Студентська рада подія 1"
               className={styles.image}
             />

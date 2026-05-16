@@ -41,7 +41,7 @@ export default function AboutUs() {
             <div className={styles.imageWrapper}>
               <div className={styles.mainCircle} />
               <img
-                src="/images/about-us-3.png"
+                src="/images/about-us-hero.png"
                 alt="Команда студентської ради"
                 width={600}
                 height={400}

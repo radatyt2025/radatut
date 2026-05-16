@@ -13,9 +13,8 @@ export default async function Team() {
         <div className={styles.header}>
           <h1 className={styles.title}>Команда</h1>
           <p className={styles.subtitle}>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry&apos;s standard dummy
-            text ever since the 1500s
+            Наша команда — це студенти з різними ідеями, навичками та досвідом,
+            яких об’єднує бажання змінювати університет на краще.
           </p>
         </div>
 
@@ -45,29 +44,27 @@ export default async function Team() {
 
                   <div className={styles.socials}>
                     <a
-                      href={'https://instagram.com/markiyankostur'}
+                      href={member.instagramLink}
                       target="_blank"
                       rel="noreferrer"
                       className={styles.socialLink}>
                       <Instagram size={18} strokeWidth={2} />
-                      <span>markiyankostur</span>
+                      <span>{member.instagramLink}</span>
                     </a>
                     <a
-                      href={'https://t.me/markiyankostur'}
+                      href={`https://web.telegram.org/k/#${member.telegramLink}`}
                       target="_blank"
                       rel="noreferrer"
                       className={styles.socialLink}>
                       <Send size={18} strokeWidth={2} />
-                      <span>markiyankostur</span>
+                      <span>{member.telegramLink}</span>
                     </a>
                   </div>
                 </div>
 
                 <div className={styles.descriptionWrapper}>
                   <p className={styles.description}>
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the
-                    industry&apos;s standard dummy text ever since the 1500s
+                    {member.description}
                   </p>
                 </div>
               </div>
