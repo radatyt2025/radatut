@@ -104,3 +104,47 @@ export const events = pgTable('events', {
   type: eventTypeEnum('type').default('INTERNAL').notNull(),
   link: text('link'),
 });
+
+export const taskStatusEnum = pgEnum('task_status', [
+  'NEW',
+  'IN_PROGRESS',
+  'COMPLETED',
+]);
+export const taskPriorityEnum = pgEnum('task_priority', [
+  'LOW',
+  'MEDIUM',
+  'HIGH',
+]);
+
+export const tasks = pgTable('tasks', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  title: text('title').notNull(),
+  dueDate: text('due_date').notNull(),
+  priority: taskPriorityEnum('priority').default('MEDIUM').notNull(),
+  status: taskStatusEnum('status').default('NEW').notNull(),
+  assigneeName: text('assignee_name').notNull(),
+  description: text('description'),
+  attachmentUrl: text('attachment_url'),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+});
+
+export const taskComments = pgTable('task_comments', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  taskId: uuid('task_id')
+    .references(() => tasks.id, { onDelete: 'cascade' })
+    .notNull(),
+  authorName: text('author_name').notNull(),
+  text: text('text').notNull(),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+});
+
+export const tasksRelations = relations(tasks, ({ many }) => ({
+  comments: many(taskComments),
+}));
+
+export const taskCommentsRelations = relations(taskComments, ({ one }) => ({
+  task: one(tasks, {
+    fields: [taskComments.taskId],
+    references: [tasks.id],
+  }),
+}));

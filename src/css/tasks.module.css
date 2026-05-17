@@ -1,0 +1,395 @@
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+}
+
+.pageHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.pageTitle {
+  font-size: 32px;
+  font-weight: 300;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.addTaskBtn {
+  background-color: #002aff;
+  color: #ffffff;
+  border: none;
+  border-radius: 24px;
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.addTaskBtn:hover {
+  background-color: #001ecc;
+}
+
+.tabsContainer {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.tab {
+  background-color: transparent;
+  border: 1px solid #d1dbff;
+  color: #a0aec0;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tabActive {
+  border-color: #002aff;
+  color: #002aff;
+  background-color: #f8faff;
+}
+
+.taskList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.taskCard {
+  background-color: #f2f4fb;
+  border-radius: 12px;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.taskHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.titleWrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.taskTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.badgeNew {
+  color: #002aff;
+  border: 1px solid #002aff;
+  border-radius: 12px;
+  padding: 2px 10px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.chevronBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+}
+
+.taskDetails {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  font-size: 13px;
+  color: #4a5568;
+}
+
+.detailItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.priorityBadge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.priorityHigh {
+  background-color: #ffeaea;
+  color: #e53e3e;
+}
+
+.priorityMedium {
+  background-color: #fffae6;
+  color: #d69e2e;
+}
+
+.priorityLow {
+  background-color: #e6ffed;
+  color: #38a169;
+}
+
+.assignee {
+  color: #718096;
+}
+
+.emptyState {
+  text-align: center;
+  color: #718096;
+  padding: 40px;
+}
+
+.expandedContent {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #d1dbff;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.taskDescription {
+  font-size: 14px;
+  color: #333333;
+  line-height: 1.5;
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+}
+
+.attachmentLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #002aff;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  background-color: #e4ecf7;
+  padding: 8px 16px;
+  border-radius: 8px;
+  width: fit-content;
+  transition: background-color 0.2s;
+}
+
+.attachmentLink:hover {
+  background-color: #d1dbff;
+}
+
+.commentsSection {
+  margin-top: 24px;
+  border-top: 1px dashed #d1dbff;
+  padding-top: 16px;
+}
+
+.commentsTitle {
+  font-size: 14px;
+  color: #1a1a1a;
+  margin: 0 0 12px 0;
+}
+
+.commentsList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.noComments {
+  font-size: 13px;
+  color: #a0aec0;
+  margin: 0;
+}
+
+.commentItem {
+  background-color: #ffffff;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+}
+
+.commentAuthor {
+  font-size: 12px;
+  font-weight: 700;
+  color: #002aff;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.commentText {
+  font-size: 13px;
+  color: #333333;
+  margin: 0;
+}
+
+.commentInputRow {
+  display: flex;
+  gap: 8px;
+}
+
+.commentInput {
+  flex: 1;
+  height: 40px;
+  border: 1px solid #d1dbff;
+  border-radius: 10px;
+  padding: 0 12px;
+  font-size: 13px;
+  outline: none;
+}
+
+.commentInput:focus {
+  border-color: #002aff;
+}
+
+.commentBtn {
+  background-color: #002aff;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 0 16px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.commentBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.customSelectContainer {
+  position: relative;
+}
+
+.statusWrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 12px;
+  cursor: pointer;
+  user-select: none;
+  transition: opacity 0.2s;
+}
+
+.statusDisabled {
+  opacity: 0.9;
+  cursor: not-allowed;
+}
+
+.wrapper_NEW {
+  color: #002aff;
+  border: 1px solid #002aff;
+  background-color: #f8faff;
+}
+
+.wrapper_IN_PROGRESS {
+  color: #d69e2e;
+  border: 1px solid #d69e2e;
+  background-color: #fffae6;
+}
+
+.wrapper_COMPLETED {
+  color: #38a169;
+  border: 1px solid #38a169;
+  background-color: #e6ffed;
+}
+
+.statusVisible {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  z-index: 10;
+  min-width: 120px;
+}
+
+.dropdownOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9;
+}
+
+.dropdownItem {
+  border: none;
+  background: none;
+  padding: 8px 12px;
+  text-align: left;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.dropdownItem_NEW {
+  color: #002aff;
+}
+.dropdownItem_NEW:hover {
+  background-color: #f8faff;
+}
+
+.dropdownItem_IN_PROGRESS {
+  color: #d69e2e;
+}
+.dropdownItem_IN_PROGRESS:hover {
+  background-color: #fffae6;
+}
+
+.dropdownItem_COMPLETED {
+  color: #38a169;
+}
+.dropdownItem_COMPLETED:hover {
+  background-color: #e6ffed;
+}
