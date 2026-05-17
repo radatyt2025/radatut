@@ -1,5 +1,5 @@
 export type UserRole = 'USER' | 'ADMIN';
-export type Team = 'Медіа' | 'Управління';
+export type Team = 'Правління' | 'Медіа' | 'Волонтерська' | 'Проєктна';
 
 declare module 'next-auth' {
   interface Session {

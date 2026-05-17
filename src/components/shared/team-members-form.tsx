@@ -31,7 +31,7 @@ const TeamMemberFormSchema = z.object({
   email: z.email(),
   password: z.string().min(6),
   role: z.enum(['USER', 'ADMIN']),
-  team: z.enum(['Медіа', 'Управління']),
+  team: z.enum(['Правління', 'Медіа', 'Волонтерська', 'Проєктна']),
   position: z.string().min(3),
   imageFile: z.instanceof(File),
 
@@ -43,7 +43,7 @@ const TeamMemberFormSchema = z.object({
 export const TeamMembersForm: React.FC = () => {
   const router = useRouter();
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-  
+
   const [fileName, setFileName] = useState<string>('Файл не обрано');
 
   const form = useForm<z.infer<typeof TeamMemberFormSchema>>({
@@ -187,7 +187,7 @@ export const TeamMembersForm: React.FC = () => {
                   <FieldLabel className={styles.fieldLabel}>
                     Зображення
                   </FieldLabel>
-                  
+
                   <label className={styles.fileWrapper}>
                     <input
                       type="file"
@@ -236,13 +236,19 @@ export const TeamMembersForm: React.FC = () => {
                       <SelectValue placeholder="Оберіть команду" />
                     </SelectTrigger>
                     <SelectContent className={styles.selectContent}>
+                      <SelectItem
+                        value="Правління"
+                        className={styles.selectItem}>
+                        Правління
+                      </SelectItem>
                       <SelectItem value="Медіа" className={styles.selectItem}>
                         Медіа
                       </SelectItem>
-                      <SelectItem
-                        value="Управління"
-                        className={styles.selectItem}>
-                        Управління
+                      <SelectItem value="Волонтерська" className={styles.selectItem}>
+                        Волонтерська
+                      </SelectItem>
+                      <SelectItem value="Проєктна" className={styles.selectItem}>
+                        Проєктна
                       </SelectItem>
                     </SelectContent>
                   </Select>
@@ -258,9 +264,7 @@ export const TeamMembersForm: React.FC = () => {
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field>
-                  <FieldLabel className={styles.fieldLabel}>
-                    Посада
-                  </FieldLabel>
+                  <FieldLabel className={styles.fieldLabel}>Посада</FieldLabel>
                   <Input
                     {...field}
                     className={styles.inputField}

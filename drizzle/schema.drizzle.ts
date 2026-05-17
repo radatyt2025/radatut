@@ -9,7 +9,7 @@ import {
 } from 'drizzle-orm/pg-core';
 
 export type UserRole = 'USER' | 'ADMIN';
-export type Team = 'Медіа' | 'Управління';
+export type Team = 'Правління' | 'Медіа' | 'Волонтерська' | 'Проєктна';
 export type Provider = 'credentials';
 
 export const userRoleEnum = pgEnum('user_role', ['USER', 'ADMIN']);
