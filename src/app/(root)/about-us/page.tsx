@@ -35,7 +35,11 @@ export default function AboutUs() {
                 працюємо над тим, щоб університет був не лише місцем навчання, а
                 й простором для ідей, ініціатив і сильного ком’юніті.
               </p>
-              <Button className={styles.joinButton}>Приєднатися</Button>
+              <Button className={styles.joinButton} asChild>
+                <a target="_blank" href="https://forms.gle/zdNAQnyfPYT44CaPA">
+                  Приєднатися
+                </a>
+              </Button>
             </div>
 
             <div className={styles.imageWrapper}>

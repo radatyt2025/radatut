@@ -13,7 +13,12 @@ export type Team = 'Медіа' | 'Управління';
 export type Provider = 'credentials';
 
 export const userRoleEnum = pgEnum('user_role', ['USER', 'ADMIN']);
-export const teamEnum = pgEnum('team', ['Медіа', 'Управління']);
+export const teamEnum = pgEnum('team', [
+  'Правління',
+  'Медіа',
+  'Волонтерська',
+  'Проєктна',
+]);
 export const providerEnum = pgEnum('provider', ['credentials']);
 
 export const users = pgTable('users', {
@@ -24,7 +29,7 @@ export const users = pgTable('users', {
   imageUrl: text('image_url').notNull(),
   role: userRoleEnum('role').notNull(),
   position: text('position').notNull().default('помічник'),
-  team: teamEnum('team').notNull(),
+  team: teamEnum('team').notNull().default('Проєктна'),
   telegramLink: text('telegram_link').notNull(),
   instagramLink: text('instagram_link').notNull(),
   description: text('description').notNull(),
