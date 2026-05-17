@@ -29,7 +29,7 @@ type AddTeamMemberPayload = {
   role: 'USER' | 'ADMIN';
   team: Team;
   imageFile: File;
-
+  position: string;
   telegramLink?: string;
   instagramLink?: string;
   description?: string;
@@ -82,6 +82,7 @@ export async function addTeamMember(
       role: payload.role,
       team: payload.team,
       imageUrl,
+      position: payload.position,
       telegramLink: payload.telegramLink ?? '',
       instagramLink: payload.instagramLink ?? '',
       description: payload.description ?? '',

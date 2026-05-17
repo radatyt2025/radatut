@@ -37,11 +37,6 @@ export default function Office() {
     },
   ];
 
-  const eventsData = [
-    { id: 1, title: 'Андріївські вечорниці', date: '12 квітня' },
-    { id: 2, title: 'Зустріч команди', date: '13 квітня' },
-  ];
-
   const documentsData = [{ id: 1, title: 'Протокол зустрічі' }];
 
   if (status === 'loading') {
@@ -98,17 +93,14 @@ export default function Office() {
 
           <div className={styles.card}>
             <div className={styles.cardHeader}>
-              <h2 className={styles.cardTitle}>{officeLabels.cards.events}</h2>
+              <h2 className={styles.cardTitle}>
+                {officeLabels.cards.eventsManagement}
+              </h2>
               <ArrowIcon />
             </div>
-            <ul className={styles.list}>
-              {eventsData.map((event) => (
-                <li key={event.id} className={styles.listItem}>
-                  <span className={styles.itemTitle}>{event.title}</span>
-                  <span className={styles.date}>{event.date}</span>
-                </li>
-              ))}
-            </ul>
+            <div className={styles.emptyState}>
+              <Link href="/office/events">Керування подіями</Link>
+            </div>
           </div>
 
           <div className={styles.card}>
@@ -129,15 +121,6 @@ export default function Office() {
               ))}
             </ul>
           </div>
-          <div className={styles.card}>
-            <div className={styles.cardHeader}>
-              <h2 className={styles.cardTitle}>{officeLabels.cards.updates}</h2>
-              <ArrowIcon />
-            </div>
-            <div className={styles.emptyState}>
-              <p>{officeLabels.cards.docs}</p>
-            </div>
-          </div>
           {isAdmin && (
             <>
               <div className={styles.card}>
@@ -149,17 +132,6 @@ export default function Office() {
                 </div>
                 <div className={styles.emptyState}>
                   <Link href="/dashboard/elections">Перейти до виборів</Link>
-                </div>
-              </div>
-              <div className={styles.card}>
-                <div className={styles.cardHeader}>
-                  <h2 className={styles.cardTitle}>
-                    {officeLabels.cards.eventsManagement}
-                  </h2>
-                  <ArrowIcon />
-                </div>
-                <div className={styles.emptyState}>
-                  <Link href="/office/events">Керування подіями</Link>
                 </div>
               </div>
             </>

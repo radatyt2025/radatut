@@ -3,8 +3,8 @@ import { eq } from 'drizzle-orm';
 
 import ElectionModal from '@/components/shared/dashboard/election-modal';
 
-import { db } from '../../../../../drizzle/drizzle-client';
-import { candidates, elections } from '../../../../../drizzle/schema.drizzle';
+import { db } from '../../../../drizzle/drizzle-client';
+import { candidates, elections } from '../../../../drizzle/schema.drizzle';
 
 export default async function InterceptedElectionModalPage() {
   

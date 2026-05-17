@@ -1,12 +1,12 @@
-
 'use client';
 
 import { ArrowRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react';
+import { toast } from 'sonner';
 
 import styles from '@/css/election-modal.module.css';
-import { submitVote } from '@/lib/action/election'; 
+import { submitVote } from '@/lib/action/election';
 
 type Candidate = {
   id: string;
@@ -22,7 +22,6 @@ interface ElectionModalProps {
   candidates: Candidate[];
 }
 
-
 export default function ElectionModal({
   electionId,
   candidates = [],
@@ -30,7 +29,6 @@ export default function ElectionModal({
   const router = useRouter();
   const overlayRef = useRef<HTMLDivElement>(null);
 
-  
   const [step, setStep] = useState<number>(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
@@ -40,7 +38,6 @@ export default function ElectionModal({
     candidateId: null as string | null,
   });
 
-  
   const [errors, setErrors] = useState({
     firstName: '',
     lastName: '',
@@ -48,20 +45,23 @@ export default function ElectionModal({
   });
   const [submitError, setSubmitError] = useState<string | null>(null);
 
-  
+  const closeModal = React.useCallback(() => {
+    router.push('/');
+  }, [router]);
+
   const handleOverlayClick = (e: React.MouseEvent) => {
     if (e.target === overlayRef.current) {
-      router.back();
+      closeModal();
     }
   };
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') router.back();
+      if (e.key === 'Escape') closeModal();
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [router]);
+  }, [router, closeModal]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -123,12 +123,11 @@ export default function ElectionModal({
     if (result?.error) {
       setSubmitError(result.error);
     } else {
-      alert('Голос успішно зараховано!');
-      router.back();
+      toast.success('Голос успішно зараховано!');
+      closeModal();
     }
   };
 
-  
   const renderStep1 = () => (
     <>
       <h2 className={styles.sectionTitle}>Кандидати</h2>
@@ -143,8 +142,6 @@ export default function ElectionModal({
               />
             </div>
             <h3 className={styles.candidateName}>{candidate.name}</h3>
-            <p className={styles.candidateRole}>{candidate.role}</p>
-            <p className={styles.candidateDesc}>{candidate.description}</p>
             <a href={candidate.link} className={styles.presentationLink}>
               Презентація кандидата
             </a>
@@ -194,7 +191,7 @@ export default function ElectionModal({
             type="text"
             name="studentId"
             className={`${styles.input} ${errors.studentId ? styles.inputError : ''}`}
-            placeholder="Напр. KB123456"
+            placeholder="Напр. 12345789"
             value={formData.studentId}
             onChange={handleInputChange}
           />
@@ -234,8 +231,6 @@ export default function ElectionModal({
               </div>
               <h3 className={styles.candidateName}>{candidate.name}</h3>
               <p className={styles.candidateRole}>{candidate.role}</p>
-              <p className={styles.candidateDesc}>{candidate.description}</p>
-
               <button
                 className={`${styles.selectButton} ${isSelected ? styles.selectButtonActive : ''}`}>
                 <div className={styles.radioCircle}>

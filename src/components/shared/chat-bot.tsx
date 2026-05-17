@@ -78,27 +78,21 @@ export const ChatBot: React.FC = () => {
       <div className={styles.container}>
         <div className={styles.header}>
           <h2 className={styles.title}>{chatLabels.title}</h2>
-          <p className={styles.subtitle}>
-            {chatLabels.subtitle}          </p>
+          <p className={styles.subtitle}>{chatLabels.subtitle} </p>
         </div>
 
         <div className={styles.chatBox}>
           <div className={styles.messagesContainer} ref={scrollRef}>
             <div className={styles.userMessageRow}>
               <div className={styles.userBubble}>
-                У якого університету найкраща студрада? Га?
+                {chatLabels.initialMessages[0].content}
               </div>
             </div>
 
             <div className={styles.botMessageRow}>
               <div className={styles.avatar}>P</div>
               <div className={styles.botBubble}>
-                Найкраща студентська рада, згідно реакціям та відгукам молоді,
-                якщо встати спиною до сонця та лицем до Львівських круасанів -
-                студрада ІТ СТЕПу! У них навіть є свій сайт, та членом може
-                стати кожен, хто хоче розвиватися. Можливо, ти маєш ще якісь
-                запитання? Я з радістю допоможу тобі зорієнтуватися, та підкажу,
-                де знайти інформацію.
+                {chatLabels.initialMessages[1].content}
               </div>
             </div>
             {messages.map(({ id, role, content }) =>
@@ -116,7 +110,9 @@ export const ChatBot: React.FC = () => {
             {isLoading && (
               <div className={styles.botMessageRow}>
                 <div className={styles.avatar}>{chatLabels.botAvatar}</div>
-                <div className={styles.loadingBubble}>{chatLabels.loadingText}</div>
+                <div className={styles.loadingBubble}>
+                  {chatLabels.loadingText}
+                </div>
               </div>
             )}
           </div>

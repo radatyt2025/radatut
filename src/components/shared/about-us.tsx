@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import * as React from 'react';
 
 import { Button } from '@/components/ui/button';
@@ -17,7 +18,9 @@ export const AboutUs: React.FC = () => {
           </div>
           <div className={styles.rightSideWrapper}>
             <div className={styles.buttonContainer}>
-              <Button variant="outline">Детальніше</Button>
+              <Button variant="outline" asChild>
+                <Link href="/about-us">Детальніше</Link>
+              </Button>
             </div>
             <div className={styles.smallImagesRow}>
               <div className={styles.smallImageContainer}>

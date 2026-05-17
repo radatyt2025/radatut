@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import * as React from 'react';
 
 import { Button } from '@/components/ui/button';
@@ -19,7 +20,9 @@ export const Events: React.FC = async () => {
       <div className={styles.container}>
         <div className={styles.header}>
           <h2 className={styles.title}>{eventsData.sectionTitle}</h2>
-          <Button variant="outline">{eventsData.moreButton}</Button>
+          <Button variant="outline">
+            <Link href="/events">{eventsData.moreButton}</Link>
+          </Button>
         </div>
 
         <div className={styles.sliderContainer}>
