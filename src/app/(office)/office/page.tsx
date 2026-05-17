@@ -2,40 +2,60 @@
 
 import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 import { Container } from '@/components/shared/container';
 import { officeLabels } from '@/constants/office/office';
 import styles from '@/css/office/office.module.css';
+import { getTasks } from '@/lib/action/tasks';
+
+type TaskDisplayModel = {
+  id: string;
+  title: string;
+  status: string;
+  statusClass: string;
+};
 
 export default function Office() {
   const { data: session, status } = useSession();
+  
+  const [tasksData, setTasksData] = useState<TaskDisplayModel[]>([]);
+
+  useEffect(() => {
+    const fetchTasks = async () => {
+      const fetchedTasks = await getTasks();
+      
+      const mappedTasks = fetchedTasks.slice(0, 3).map((task) => {
+        let statusText = 'Нове';
+        let statusClass = 'statusPlanned';
+        
+        if (task.status === 'IN_PROGRESS') {
+          statusText = 'В процесі';
+          statusClass = 'statusProgress';
+        } else if (task.status === 'COMPLETED') {
+          statusText = 'Завершено';
+          statusClass = 'statusProgress';
+        }
+
+        return {
+          id: task.id,
+          title: task.title,
+          status: statusText,
+          statusClass: statusClass,
+        };
+      });
+      
+      setTasksData(mappedTasks);
+    };
+
+    fetchTasks();
+  }, []);
 
   const handleLogOut = () => {
     signOut({
       callbackUrl: '/',
     });
   };
-
-  const tasksData = [
-    {
-      id: 1,
-      title: 'Підготувати пост про донорство',
-      status: 'В процесі',
-      statusClass: 'statusProgress',
-    },
-    {
-      id: 2,
-      title: 'Зробити афішу',
-      status: 'Заплановано',
-      statusClass: 'statusPlanned',
-    },
-    {
-      id: 3,
-      title: 'Зробити афішу',
-      status: 'Прострочено',
-      statusClass: 'statusOverdue',
-    },
-  ];
 
   const documentsData = [{ id: 1, title: 'Протокол зустрічі' }];
 
@@ -76,18 +96,24 @@ export default function Office() {
           <div className={styles.card}>
             <div className={styles.cardHeader}>
               <h2 className={styles.cardTitle}>{officeLabels.cards.tasks}</h2>
-              <ArrowIcon />
+              <Link href="/tasks">
+                <ArrowIcon />
+              </Link>
             </div>
             <ul className={styles.list}>
-              {tasksData.map((task) => (
-                <li key={task.id} className={styles.listItem}>
-                  <span className={styles.itemTitle}>{task.title}</span>
-                  <span
-                    className={`${styles.status} ${styles[task.statusClass]}`}>
-                    {task.status}
-                  </span>
-                </li>
-              ))}
+              {tasksData.length > 0 ? (
+                tasksData.map((task) => (
+                  <li key={task.id} className={styles.listItem}>
+                    <span className={styles.itemTitle}>{task.title}</span>
+                    <span
+                      className={`${styles.status} ${styles[task.statusClass]}`}>
+                      {task.status}
+                    </span>
+                  </li>
+                ))
+              ) : (
+                <li className={styles.emptyState}>Немає активних задач</li>
+              )}
             </ul>
           </div>
 
