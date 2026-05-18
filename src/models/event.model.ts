@@ -7,4 +7,5 @@ export type EventModel = {
   description: string;
   type: string;
   link?: string | null;
+  buttonName: string | null
 };

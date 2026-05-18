@@ -26,8 +26,6 @@ export default function ProfileEventsClient({
   );
 
   const handleDelete = async (id: string) => {
-    if (!confirm('Ви впевнені, що хочете видалити цю подію?')) return;
-
     const response = await deleteEvent(id);
     if (response.success) {
       toast.success(response.message);
@@ -108,7 +106,7 @@ export default function ProfileEventsClient({
                     <div className={styles.cardFooter}>
                       <Button className={styles.detailsButton} asChild>
                         <a target="_blank" href={event.link} rel="noreferrer">
-                          Перейти
+                          {event.buttonName}
                         </a>
                       </Button>
                     </div>

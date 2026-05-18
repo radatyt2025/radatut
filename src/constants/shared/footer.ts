@@ -1,7 +1,7 @@
 export const footerData = {
   logo: { label: 'РадаТут', href: '/' },
   socials: [
-    { label: 'Instagram', href: 'https://instagram.com', icon: 'instagram' }
+    { label: 'Instagram', href: 'https://www.instagram.com/its_studrada?igsh=ZG5ubG4yZmdncnh5', icon: 'instagram' }
   ],
   navLinks: [
     { label: 'Події', href: '/events' },
@@ -10,8 +10,7 @@ export const footerData = {
     { label: 'Кабінет', href: '/cabinet' },
   ],
   contacts: {
-    phone: { label: '+380 00 000 00 00', href: 'tel:+380000000000' },
-    email: { label: 'itstepsupport@gmail.com', href: 'mailto:itstepsupport@gmail.com' },
+    email: { label: 'studgov@itstep.org', href: 'mailto:studgov@itstep.org' },
   },
   legal: [
     { label: 'Політика конфіденційності', href: '/privacy' },

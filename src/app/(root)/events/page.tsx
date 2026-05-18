@@ -30,7 +30,7 @@ export default async function Events() {
                   {event.link && (
                     <Button className={styles.primaryButton}>
                       <a target="_blank" href={event.link}>
-                        Зареєструватися
+                        {event.buttonName}
                       </a>
                     </Button>
                   )}

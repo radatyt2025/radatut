@@ -49,15 +49,10 @@ export const Footer: React.FC = () => {
         </div>
 
         <div className={styles.rightSection}>
-          <div className={styles.contactInfo}>
-            <a href={footerData.contacts.phone.href} className={styles.link}>
-              {footerData.contacts.phone.label}
-            </a>
+          <div className={styles.legalInfo}>
             <a href={footerData.contacts.email.href} className={styles.link}>
               {footerData.contacts.email.label}
             </a>
-          </div>
-          <div className={styles.legalInfo}>
             {footerData.legal.map((item) => (
               <Link key={item.href} href={item.href} className={styles.link}>
                 {item.label}

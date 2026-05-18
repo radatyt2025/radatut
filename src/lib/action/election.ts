@@ -1,6 +1,7 @@
 'use server';
 
 import { eq, and } from 'drizzle-orm';
+import { revalidatePath } from 'next/cache';
 
 import { db } from '../../../drizzle/drizzle-client';
 import {
@@ -68,10 +69,13 @@ export async function createElection(formData: FormData) {
       description,
     })
     .returning();
+
+  revalidatePath('/dashboard/elections');
 }
 
 export async function deleteElection(id: string) {
   await db.delete(elections).where(eq(elections.id, id));
+  revalidatePath('/dashboard/elections');
 }
 
 export async function addCandidate(formData: FormData) {

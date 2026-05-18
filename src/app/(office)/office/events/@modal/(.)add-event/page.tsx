@@ -20,6 +20,7 @@ export default function AddEventModal() {
   const [formData, setFormData] = useState({
     title: '',
     link: '',
+    buttonName: '',
     date: '',
     time: '',
     description: '',
@@ -162,16 +163,29 @@ export default function AddEventModal() {
                   onChange={handleInputChange}
                 />
               </div>
-              <div className={styles.inputGroup}>
-                <label className={styles.label}>Посилання на подію</label>
-                <input
-                  type="text"
-                  name="link"
-                  className={styles.input}
-                  placeholder="Введіть посилання..."
-                  value={formData.link}
-                  onChange={handleInputChange}
-                />
+              <div className={styles.rowInputs}>
+                <div className={styles.inputGroup}>
+                  <label className={styles.label}>Посилання на подію</label>
+                  <input
+                    type="text"
+                    name="link"
+                    className={styles.input}
+                    placeholder="Введіть посилання..."
+                    value={formData.link}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                <div className={styles.inputGroup}>
+                  <label className={styles.label}>Назва кнопки</label>
+                  <input
+                    type="text"
+                    name="buttonName"
+                    className={styles.input}
+                    placeholder="Назва кнопки"
+                    value={formData.buttonName}
+                    onChange={handleInputChange}
+                  />
+                </div>
               </div>
 
               <div className={styles.rowInputs}>

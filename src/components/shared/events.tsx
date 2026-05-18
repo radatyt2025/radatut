@@ -50,7 +50,7 @@ export const Events: React.FC = async () => {
                       {event.link && (
                         <Button className={styles.registerButton} asChild>
                           <a target="_blank" href={event.link}>
-                            {eventsData.registerButton}
+                            {event.buttonName}
                           </a>
                         </Button>
                       )}

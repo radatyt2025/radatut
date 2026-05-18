@@ -230,7 +230,6 @@ export default function ElectionModal({
                 />
               </div>
               <h3 className={styles.candidateName}>{candidate.name}</h3>
-              <p className={styles.candidateRole}>{candidate.role}</p>
               <button
                 className={`${styles.selectButton} ${isSelected ? styles.selectButtonActive : ''}`}>
                 <div className={styles.radioCircle}>

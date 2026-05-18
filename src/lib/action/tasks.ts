@@ -126,3 +126,14 @@ export async function addTaskComment(
     return { success: false, message: 'Не вдалося додати коментар' };
   }
 }
+
+export async function deleteTask(taskId: string) {
+  try {
+    await db.delete(tasks).where(eq(tasks.id, taskId));
+    revalidatePath('/tasks');
+    return { success: true };
+  } catch (error) {
+    console.error('Delete Task Error:', error);
+    return { success: false, message: 'Помилка видалення задачі' };
+  }
+}

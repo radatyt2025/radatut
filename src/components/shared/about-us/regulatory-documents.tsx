@@ -8,7 +8,7 @@ const documentsData = [
   { 
     id: 1, 
     title: 'Положення про студентське самоврядування', 
-    url: '#' 
+    url: 'https://fsx1.itstep.org/api/v1/files/bvNiKXlsKHe1iow9gt8kUyA7PIVk0RVR?inline=true' 
   }
 ];
 
@@ -24,7 +24,7 @@ export const RegulatoryDocuments: React.FC = () => {
 
         <div className={styles.documentsList}>
           {documentsData.map((doc) => (
-            <a key={doc.id} href={doc.url} className={styles.documentLink}>
+            <a key={doc.id} target='_blank' href={doc.url} className={styles.documentLink}>
               <svg 
                 className={styles.icon} 
                 viewBox="0 0 24 24" 

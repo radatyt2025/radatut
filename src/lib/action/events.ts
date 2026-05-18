@@ -25,6 +25,7 @@ export type CreateEventPayload = {
   type: 'INTERNAL' | 'EXTERNAL';
   imageFile: File;
   link: string | null;
+  buttonName: string | null
 };
 
 export async function createEvent(payload: CreateEventPayload) {
@@ -53,6 +54,7 @@ export async function createEvent(payload: CreateEventPayload) {
       type: payload.type as 'INTERNAL' | 'EXTERNAL',
       imageUrl: imageUrl,
       link: payload.link,
+      buttonName: payload.buttonName
     };
 
     await db.insert(events).values(newEvent);
