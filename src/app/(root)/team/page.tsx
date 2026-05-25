@@ -1,7 +1,5 @@
 import { Instagram, Send } from 'lucide-react';
-import Link from 'next/link';
 
-import { Button } from '@/components/ui/button';
 import styles from '@/css/team-page.module.css';
 import { getTeam } from '@/lib/get-team';
 
@@ -63,16 +61,11 @@ export default async function Team() {
                 </div>
 
                 <div className={styles.descriptionWrapper}>
-                  <p className={styles.description}>
-                    {member.description}
-                  </p>
+                  <p className={styles.description}>{member.description}</p>
                 </div>
               </div>
             </div>
           ))}
-          <Button asChild>
-            <Link href="/dashboard/team-members">Додати Учасника</Link>
-          </Button>
         </div>
       </div>
     </section>

@@ -154,3 +154,20 @@ export const taskCommentsRelations = relations(taskComments, ({ one }) => ({
     references: [tasks.id],
   }),
 }));
+
+export const documents = pgTable('documents', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  title: text('title').notNull(),
+  fileUrl: text('file_url').notNull(),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+});
+
+export const updates = pgTable('updates', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  actionType: text('action_type').notNull(), 
+  authorName: text('author_name').notNull(),
+  targetName: text('target_name'), 
+  entityTitle: text('entity_title'),
+  isViewed: boolean('is_viewed').default(false).notNull(),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+});

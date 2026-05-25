@@ -7,7 +7,10 @@ import { useEffect, useState } from 'react';
 import { Container } from '@/components/shared/container';
 import { officeLabels } from '@/constants/office/office';
 import styles from '@/css/office/office.module.css';
+import { getDocuments } from '@/lib/action/documents';
+import { getEvents } from '@/lib/action/events';
 import { getTasks } from '@/lib/action/tasks';
+import { getUpdates } from '@/lib/action/updates';
 
 type TaskDisplayModel = {
   id: string;
@@ -16,19 +19,46 @@ type TaskDisplayModel = {
   statusClass: string;
 };
 
+type EventsDisplayModel = {
+  id: string;
+  title: string;
+  date: string;
+};
+
+type DocumentDisplayModel = {
+  id: string;
+  title: string;
+  fileUrl: string;
+};
+
+type UpdateDisplayModel = {
+  id: string;
+  title: string;
+  status: string;
+  statusClass: string;
+};
+
 export default function Office() {
   const { data: session, status } = useSession();
-  
+
   const [tasksData, setTasksData] = useState<TaskDisplayModel[]>([]);
+  const [eventsData, setEventsData] = useState<EventsDisplayModel[]>([]);
+  const [documentsData, setDocumentsData] = useState<DocumentDisplayModel[]>([]);
+  const [updatesData, setUpdatesData] = useState<UpdateDisplayModel[]>([]);
 
   useEffect(() => {
-    const fetchTasks = async () => {
-      const fetchedTasks = await getTasks();
-      
+    const fetchData = async () => {
+      const [fetchedTasks, fetchedEvents, fetchedDocs, fetchedUpdates] = await Promise.all([
+        getTasks(),
+        getEvents(),
+        getDocuments(),
+        getUpdates(),
+      ]);
+
       const mappedTasks = fetchedTasks.slice(0, 3).map((task) => {
         let statusText = 'Нове';
         let statusClass = 'statusPlanned';
-        
+
         if (task.status === 'IN_PROGRESS') {
           statusText = 'В процесі';
           statusClass = 'statusProgress';
@@ -44,11 +74,43 @@ export default function Office() {
           statusClass: statusClass,
         };
       });
-      
       setTasksData(mappedTasks);
+
+      const mappedEvents = fetchedEvents.slice(0, 3).map((event) => {
+        return {
+          id: event.id,
+          title: event.title,
+          date: event.date,
+        };
+      });
+      setEventsData(mappedEvents);
+
+      const mappedDocs = fetchedDocs.slice(0, 3).map((doc) => {
+        return {
+          id: doc.id,
+          title: doc.title,
+          fileUrl: doc.fileUrl,
+        };
+      });
+      setDocumentsData(mappedDocs);
+
+      
+      const mappedUpdates = fetchedUpdates.slice(0, 3).map((update) => {
+        const titleText = update.actionType === 'TASK' 
+          ? `${update.authorName} додав задачу` 
+          : `${update.authorName} додав документ`;
+
+        return {
+          id: update.id,
+          title: titleText,
+          status: update.isViewed ? 'Переглянуто' : 'Нове',
+          statusClass: update.isViewed ? 'statusPlanned' : 'statusProgress',
+        };
+      });
+      setUpdatesData(mappedUpdates);
     };
 
-    fetchTasks();
+    fetchData();
   }, []);
 
   const handleLogOut = () => {
@@ -56,8 +118,6 @@ export default function Office() {
       callbackUrl: '/',
     });
   };
-
-  const documentsData = [{ id: 1, title: 'Протокол зустрічі' }];
 
   if (status === 'loading') {
     return (
@@ -75,6 +135,7 @@ export default function Office() {
   return (
     <Container>
       <div className={styles.wrapper}>
+        
         <div className={styles.header}>
           <h1 className={styles.greeting}>
             {officeLabels.greeting},{' '}
@@ -92,11 +153,13 @@ export default function Office() {
           </div>
         </div>
 
+        
         <div className={styles.grid}>
+          
           <div className={styles.card}>
             <div className={styles.cardHeader}>
               <h2 className={styles.cardTitle}>{officeLabels.cards.tasks}</h2>
-              <Link href="/tasks">
+              <Link href="/tasks" className={styles.arrowLink}>
                 <ArrowIcon />
               </Link>
             </div>
@@ -117,53 +180,129 @@ export default function Office() {
             </ul>
           </div>
 
+          
           <div className={styles.card}>
             <div className={styles.cardHeader}>
               <h2 className={styles.cardTitle}>
                 {officeLabels.cards.eventsManagement}
               </h2>
-              <ArrowIcon />
+              <Link href="/office/events" className={styles.arrowLink}>
+                <ArrowIcon />
+              </Link>
             </div>
-            <div className={styles.emptyState}>
-              <Link href="/office/events">Керування подіями</Link>
-            </div>
+            <ul className={styles.list}>
+              {eventsData.length > 0 ? (
+                eventsData.map((event) => (
+                  <li key={event.id} className={styles.listItem}>
+                    <span className={styles.itemTitle}>{event.title}</span>
+                    <span>{event.date}</span>
+                  </li>
+                ))
+              ) : (
+                <li className={styles.emptyState}>Немає найближчих подій</li>
+              )}
+            </ul>
           </div>
 
+          
           <div className={styles.card}>
             <div className={styles.cardHeader}>
               <h2 className={styles.cardTitle}>{officeLabels.cards.docs}</h2>
-              <ArrowIcon />
+              <Link href="/office/documents" className={styles.arrowLink}>
+                <ArrowIcon />
+              </Link>
             </div>
             <ul className={styles.list}>
-              {documentsData.map((doc) => (
-                <li key={doc.id} className={styles.listItem}>
-                  <div className={styles.docItemWrapper}>
-                    <DocIcon />
-                    <Link href="/office/events">
-                      <span className={styles.itemTitle}>{doc.title}</span>
-                    </Link>
-                  </div>
-                </li>
-              ))}
+              {documentsData.length > 0 ? (
+                documentsData.map((doc) => (
+                  <li key={doc.id} className={styles.listItem}>
+                    <div className={styles.docItemWrapper}>
+                      <DocIcon />
+                      <a href={doc.fileUrl} target="_blank" rel="noreferrer">
+                        <span className={styles.itemTitle}>{doc.title}</span>
+                      </a>
+                    </div>
+                  </li>
+                ))
+              ) : (
+                <li className={styles.emptyState}>Немає завантажених документів</li>
+              )}
             </ul>
           </div>
-          {isAdmin && (
-            <>
+
+          
+          <div className={styles.card}>
+            <div className={styles.cardHeader}>
+              <h2 className={styles.cardTitle}>Оновлення</h2>
+              <Link href="/office/updates" className={styles.arrowLink}>
+                <ArrowIcon />
+              </Link>
+            </div>
+            <ul className={styles.list}>
+              {updatesData.length > 0 ? (
+                updatesData.map((update) => (
+                  <li key={update.id} className={styles.listItem}>
+                    <span className={styles.itemTitle}>{update.title}</span>
+                    <span
+                      className={`${styles.status} ${styles[update.statusClass]}`}>
+                      {update.status}
+                    </span>
+                  </li>
+                ))
+              ) : (
+                <li className={styles.emptyState}>Немає нових оновлень</li>
+              )}
+            </ul>
+          </div>
+        </div>
+
+        
+        {isAdmin && (
+          <div className={styles.adminSection}>
+            <div className={styles.adminDivider}>
+              <h3 className={styles.adminTitle}>Панель адміністратора</h3>
+            </div>
+            <div className={styles.grid}>
+              
               <div className={styles.card}>
                 <div className={styles.cardHeader}>
                   <h2 className={styles.cardTitle}>
                     {officeLabels.cards.elections}
                   </h2>
-                  <ArrowIcon />
+                  <Link
+                    href="/dashboard/elections"
+                    className={styles.arrowLink}>
+                    <ArrowIcon />
+                  </Link>
                 </div>
                 <div className={styles.emptyState}>
-                  <Link href="/dashboard/elections">Перейти до виборів</Link>
+                  <Link href="/dashboard/elections" className={styles.textLink}>
+                    Перейти до виборів
+                  </Link>
                 </div>
               </div>
-            </>
-          )}
-        </div>
+              <div className={styles.card}>
+                <div className={styles.cardHeader}>
+                  <h2 className={styles.cardTitle}>Учасники</h2>
+                  <Link
+                    href="/dashboard/team-members"
+                    className={styles.arrowLink}>
+                    <ArrowIcon />
+                  </Link>
+                </div>
+                <div className={styles.emptyState}>
+                  <Link
+                    href="/dashboard/team-members"
+                    className={styles.textLink}>
+                    Керувати учасниками
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
+        
         <div className={styles.footer}>
           <button className={styles.logoutButton} onClick={handleLogOut}>
             <LogoutIcon />
@@ -174,6 +313,7 @@ export default function Office() {
     </Container>
   );
 }
+
 
 const ArrowIcon = () => (
   <svg

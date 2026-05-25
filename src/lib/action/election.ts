@@ -100,4 +100,5 @@ export async function addCandidate(formData: FormData) {
     imageUrl: selectedUser.imageUrl,
     link: selectedUser.telegramLink,
   });
+  revalidatePath('/dashboard/elections');
 }

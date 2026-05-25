@@ -5,10 +5,7 @@
   padding: 40px 20px;
   width: 100%;
   box-sizing: border-box;
-  font-family:
-    system-ui,
-    -apple-system,
-    sans-serif;
+  font-family: system-ui, -apple-system, sans-serif;
 }
 
 .header {
@@ -21,7 +18,7 @@
 .greeting {
   font-size: 32px;
   font-weight: 700;
-  color: var(--primary);
+  color: var(--primary, #002aff);
   margin: 0;
 }
 
@@ -30,6 +27,12 @@
   color: #1a1a1a;
   margin: 0;
 }
+
+.userRoles {
+  display: flex;
+  justify-content: space-around;
+}
+
 
 .grid {
   display: grid;
@@ -40,10 +43,47 @@
   width: 100%;
 }
 
-.userRoles {
+
+.adminSection {
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
 }
+
+.adminDivider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #a0aec0;
+}
+
+.adminDivider::before,
+.adminDivider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px dashed #d1dbff;
+}
+
+.adminDivider:not(:empty)::before {
+  margin-right: 16px;
+}
+
+.adminDivider:not(:empty)::after {
+  margin-left: 16px;
+}
+
+.adminTitle {
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0;
+  color: #718096;
+}
+
 
 .card {
   border: 1px solid #e4ecf7;
@@ -53,6 +93,12 @@
   flex-direction: column;
   min-height: 200px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 10px 25px rgba(0, 38, 255, 0.1); 
+  transform: translateY(-4px); 
 }
 
 .cardHeader {
@@ -69,11 +115,40 @@
   margin: 0;
 }
 
+
+.arrowLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  margin: -8px; 
+  border-radius: 50%;
+  color: #1a1a1a;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.arrowLink:hover {
+  background-color: #f2f4fb;
+  color: var(--primary, #002aff);
+}
+
 .icon {
   width: 20px;
   height: 20px;
-  color: #1a1a1a;
+  color: inherit; 
 }
+
+
+.textLink {
+  color: #a3c4ff;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.textLink:hover {
+  color: var(--primary, #002aff);
+}
+
 
 .list {
   list-style: none;
@@ -95,6 +170,7 @@
   color: #333;
 }
 
+
 .status,
 .date {
   font-size: 16px;
@@ -105,16 +181,13 @@
   color: #92e3a9;
 }
 
-.statusPlanned {
+.statusPlanned,
+.date {
   color: #a3c4ff;
 }
 
 .statusOverdue {
   color: #ffb3b3;
-}
-
-.date {
-  color: #a3c4ff;
 }
 
 .emptyState {
@@ -125,6 +198,7 @@
   color: #a3c4ff;
   font-size: 16px;
 }
+
 
 .docItemWrapper {
   display: flex;
@@ -137,6 +211,7 @@
   height: 20px;
   color: #1a1a1a;
 }
+
 
 .footer {
   display: flex;
