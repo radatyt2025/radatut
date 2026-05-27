@@ -199,6 +199,7 @@
   font-size: 0.9rem;
   pointer-events: none;
   font-family: inherit;
+  flex-shrink: 0;
 }
 
 .fileName {
@@ -208,4 +209,6 @@
   overflow: hidden;
   text-overflow: ellipsis;
   pointer-events: none;
+  flex: 1;
+  min-width: 0;
 }

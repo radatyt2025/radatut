@@ -53,7 +53,8 @@ export const candidates = pgTable('candidates', {
   role: text('role').notNull(),
   description: text('description').notNull(),
   imageUrl: text('image_url').default('/images/default.png').notNull(),
-  link: text('link').default('#').notNull(),
+  link: text('link').default('https://google.com').notNull(),
+  personalLink: text('personal_link').notNull().default('https://google.com'),
 });
 
 export const votes = pgTable('votes', {

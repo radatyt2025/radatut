@@ -14,7 +14,7 @@ type Candidate = {
   role: string;
   description: string;
   imageUrl: string;
-  link: string;
+  personalLink: string;
 };
 
 interface ElectionModalProps {
@@ -142,7 +142,9 @@ export default function ElectionModal({
               />
             </div>
             <h3 className={styles.candidateName}>{candidate.name}</h3>
-            <a href={candidate.link} className={styles.presentationLink}>
+            <a
+              href={candidate.personalLink}
+              className={styles.presentationLink}>
               Презентація кандидата
             </a>
           </div>

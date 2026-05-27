@@ -406,3 +406,74 @@
   width: 100%;
   box-sizing: border-box;
 }
+
+@media (max-width: 900px) {
+  .header {
+    flex-direction: column;
+  }
+  
+  .mainImageWrapper {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+
+  .backButton {
+    top: 20px;
+    left: 20px;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .candidatesGrid {
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .candidateCard {
+    width: 100%;
+    max-width: 320px; 
+  }
+
+  .sectionTitle {
+    font-size: 26px;
+    margin-bottom: 24px;
+  }
+}
+
+
+@media (max-width: 640px) {
+  .overlay {
+    padding: 16px;
+  }
+  
+  .modalContent {
+    padding: 24px 16px;
+  }
+
+  
+  .footer {
+    flex-direction: column-reverse;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 32px; 
+    min-height: auto;
+  }
+  
+  .pagination {
+    position: static; 
+    transform: none;
+    width: 100%;
+    justify-content: center; 
+  }
+  
+  .primaryButton {
+    width: 100%;
+    padding: 14px 24px; 
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+  }
+}

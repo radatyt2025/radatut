@@ -178,7 +178,11 @@
 }
 
 .statusProgress {
-  color: #92e3a9;
+  color: #d69e2e; 
+}
+
+.statusCompleted {
+  color: #38a169; 
 }
 
 .statusPlanned,
