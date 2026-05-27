@@ -25,7 +25,7 @@ export type CreateEventPayload = {
   type: 'INTERNAL' | 'EXTERNAL';
   imageFile: File;
   link: string | null;
-  buttonName: string | null
+  buttonName: string | null;
 };
 
 export async function createEvent(payload: CreateEventPayload) {
@@ -54,11 +54,11 @@ export async function createEvent(payload: CreateEventPayload) {
       type: payload.type as 'INTERNAL' | 'EXTERNAL',
       imageUrl: imageUrl,
       link: payload.link,
-      buttonName: payload.buttonName
+      buttonName: payload.buttonName,
     };
 
     await db.insert(events).values(newEvent);
-    
+
     revalidatePath('/office/events');
 
     return { success: true, message: 'Подію успішно створено!' };
@@ -71,12 +71,25 @@ export async function createEvent(payload: CreateEventPayload) {
 export async function getEvents() {
   try {
     const allEvents = await db.select().from(events);
-    return allEvents;
+
+    return allEvents.sort((a, b) => {
+      const dateA = parseDate(a.date).getTime();
+      const dateB = parseDate(b.date).getTime();
+      return dateB - dateA;
+    });
   } catch (error) {
     console.error('Get Events Error:', error);
     return [];
   }
 }
+
+const parseDate = (dateStr: string) => {
+  const parts = dateStr.split('.');
+  if (parts.length === 3) {
+    return new Date(`${parts[2]}-${parts[1]}-${parts[0]}`);
+  }
+  return new Date(dateStr);
+};
 
 export async function deleteEvent(id: string) {
   try {

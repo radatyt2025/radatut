@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+**Тема роботи:** Розроблення веб-системи “Рада Тут” для управління діяльністю студентської ради університету
 
-## Getting Started
+## Автор
 
-First, run the development server:
+**ПІБ:** Костур Маркіян Орестович
+
+**Група:** 4CS-42
+
+## Науковий керівник
+
+**ПІБ:** Райтер Орест Костянтинович
+
+**Посада:** PhD, викладач ПЗВО «ІТ СТЕП Університет
+
+## Опис проєкту
+
+«Рада Тут» — це вебсистема для автоматизації та централізації роботи студентської ради. Проєкт об’єднує управління подіями, завданнями, документами, командами та електронними виборами в одному інформаційному просторі. Система складається з публічного сайту для студентів та внутрішньої платформи для членів студентської ради, що дозволяє покращити комунікацію, координацію команди та прозорість процесів.
+
+## Інструкція зі встановлення та запуску
+
+Цей вебдодаток розроблено на базі фреймворку Next.js. Для успішного налаштування локального середовища та запуску проєкту виконайте наведені нижче кроки.
+
+### 1. Попередні вимоги
+
+Переконайтеся, що у вас встановлено:
+
+- [Node.js](https://nodejs.org/) (версія 18 або вища)
+- npm або yarn
+
+### 2. Встановлення залежностей
+
+Відкрийте термінал у кореневій папці проекту та виконайте команду:
+
+```bash
+npm install
+```
+
+### 3. Налаштування змінних оточення
+
+Створіть файл .env у кореневій папці проекту. Додайте необхідні змінні: як у прикладі .env.example
+
+### 3. Запустіть проєкт командою
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

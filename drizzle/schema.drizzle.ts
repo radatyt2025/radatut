@@ -110,6 +110,7 @@ export const events = pgTable('events', {
   type: eventTypeEnum('type').default('INTERNAL').notNull(),
   link: text('link'),
   buttonName: text('button_name').default('Зареєструватись'),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
 });
 
 export const taskStatusEnum = pgEnum('task_status', [

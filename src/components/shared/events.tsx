@@ -25,7 +25,6 @@ const parseDate = (dateStr: string) => {
 export const Events: React.FC = async () => {
   const events = await getEvents();
   
-  
   const now = new Date();
   now.setHours(0, 0, 0, 0);
 
@@ -43,41 +42,44 @@ export const Events: React.FC = async () => {
           <Carousel opts={{ align: 'start' }} className="w-full">
             <CarouselContent>
               {events
-                .filter((event) => {
+                .filter((event) => event.type === 'INTERNAL') // Показуємо всі INTERNAL
+                .map((event) => {
                   const eventDate = parseDate(event.date);
-                  
-                  return event.type === 'INTERNAL' && eventDate >= now;
-                })
-                .map((event) => (
-                  <CarouselItem key={event.id} className="basis-full">
-                    <div className={styles.card}>
-                      <div className={styles.imageWrapper}>
-                        <img
-                          src={event.imageUrl}
-                          alt={event.title}
-                          className={styles.image}
-                        />
-                      </div>
+                  const isUpcoming = eventDate >= now;
 
-                      <div className={styles.contentWrapper}>
-                        <div className={styles.textContent}>
-                          <h3 className={styles.eventTitle}>{event.title}</h3>
-                          <p className={styles.eventDate}>{event.date}</p>
-                          <p className={styles.eventDescription}>
-                            {event.description}
-                          </p>
+                  return (
+                    <CarouselItem key={event.id} className="basis-full">
+                      <div className={styles.card}>
+                        <div className={styles.imageWrapper}>
+                          <img
+                            src={event.imageUrl}
+                            alt={event.title}
+                            className={styles.image}
+                          />
                         </div>
-                        {event.link && (
-                          <Button className={styles.registerButton} asChild>
-                            <a target="_blank" rel="noreferrer" href={event.link}>
-                              {event.buttonName}
-                            </a>
-                          </Button>
-                        )}
+
+                        <div className={styles.contentWrapper}>
+                          <div className={styles.textContent}>
+                            <h3 className={styles.eventTitle}>{event.title}</h3>
+                            <p className={styles.eventDate}>{event.date}</p>
+                            <p className={styles.eventDescription}>
+                              {event.description}
+                            </p>
+                          </div>
+                          
+                          {/* Кнопка відображається лише для майбутніх подій, у яких є посилання */}
+                          {event.link && isUpcoming && (
+                            <Button className={styles.registerButton} asChild>
+                              <a target="_blank" rel="noreferrer" href={event.link}>
+                                {event.buttonName || 'Детальніше'}
+                              </a>
+                            </Button>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  </CarouselItem>
-                ))}
+                    </CarouselItem>
+                  );
+                })}
             </CarouselContent>
 
             <div className={styles.controlsWrapper}>
