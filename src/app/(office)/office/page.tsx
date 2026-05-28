@@ -1,10 +1,15 @@
+import { getServerSession } from 'next-auth';
+
 import OfficeClient from '@/components/shared/office/office-client';
+import { authOptions } from '@/constants/auth-options';
 import { getDocuments } from '@/lib/action/documents';
 import { getEvents } from '@/lib/action/events';
 import { getTasks } from '@/lib/action/tasks';
 import { getUpdates } from '@/lib/action/updates';
 
 export default async function OfficePage() {
+  const session = await getServerSession(authOptions);
+  const currentUserFullName = session?.user?.fullName || '';
   
   const [fetchedTasks, fetchedEvents, fetchedDocs, fetchedUpdates] = await Promise.all([
     getTasks(),
@@ -13,8 +18,9 @@ export default async function OfficePage() {
     getUpdates(),
   ]);
 
+  const myTasks = fetchedTasks.filter(task => task.assigneeName === currentUserFullName);
   
-  const tasksData = fetchedTasks.slice(0, 3).map((task) => {
+  const tasksData = myTasks.slice(0, 3).map((task) => {
     let statusText = 'Нове';
     let statusClass = 'statusPlanned';
 
@@ -31,6 +37,7 @@ export default async function OfficePage() {
       title: task.title,
       status: statusText,
       statusClass: statusClass,
+      assigneeName: task.assigneeName,
     };
   });
 
@@ -58,9 +65,6 @@ export default async function OfficePage() {
       id: update.id,
       title: titleText,
       status: update.isViewed ? 'Переглянуто' : 'Нове',
-      
-      
-      
       statusClass: update.isViewed ? 'statusCompleted' : 'statusPlanned',
     };
   });

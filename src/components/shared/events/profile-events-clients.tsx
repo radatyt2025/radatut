@@ -16,7 +16,7 @@ interface ProfileEventsProps {
 }
 
 export default function ProfileEventsClient({
-  isAdmin = true,
+  isAdmin = false,
   initialEvents = [],
 }: ProfileEventsProps) {
   const [activeTab, setActiveTab] = useState<'INTERNAL' | 'EXTERNAL'>('INTERNAL');

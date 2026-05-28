@@ -7,12 +7,12 @@ import { Container } from '@/components/shared/container';
 import { officeLabels } from '@/constants/office/office';
 import styles from '@/css/office/office.module.css';
 
-
 type TaskDisplayModel = {
   id: string;
   title: string;
   status: string;
   statusClass: string;
+  assigneeName?: string;
 };
 
 type EventsDisplayModel = {
@@ -68,11 +68,14 @@ export default function OfficeClient({
   const userTeam = session?.user?.team;
   const isAdmin = userRole === 'ADMIN';
 
+  const myTasks = tasksData.filter(
+    (task) => !task.assigneeName || task.assigneeName === session?.user?.fullName
+  );
+
   return (
     <Container>
       <div className={styles.wrapper}>
         
-        {}
         <div className={styles.header}>
           <h1 className={styles.greeting}>
             {officeLabels.greeting},{' '}
@@ -90,7 +93,6 @@ export default function OfficeClient({
           </div>
         </div>
 
-        
         <div className={styles.grid}>
           
           <div className={styles.card}>
@@ -101,8 +103,8 @@ export default function OfficeClient({
               </Link>
             </div>
             <ul className={styles.list}>
-              {tasksData.length > 0 ? (
-                tasksData.map((task) => (
+              {myTasks.length > 0 ? (
+                myTasks.map((task) => (
                   <li key={task.id} className={styles.listItem}>
                     <span className={styles.itemTitle}>{task.title}</span>
                     <span
@@ -117,7 +119,6 @@ export default function OfficeClient({
             </ul>
           </div>
 
-          
           <div className={styles.card}>
             <div className={styles.cardHeader}>
               <h2 className={styles.cardTitle}>
@@ -141,7 +142,6 @@ export default function OfficeClient({
             </ul>
           </div>
 
-          
           <div className={styles.card}>
             <div className={styles.cardHeader}>
               <h2 className={styles.cardTitle}>{officeLabels.cards.docs}</h2>
@@ -167,7 +167,6 @@ export default function OfficeClient({
             </ul>
           </div>
 
-          
           <div className={styles.card}>
             <div className={styles.cardHeader}>
               <h2 className={styles.cardTitle}>Оновлення</h2>
@@ -193,7 +192,6 @@ export default function OfficeClient({
           </div>
         </div>
 
-        
         {isAdmin && (
           <div className={styles.adminSection}>
             <div className={styles.adminDivider}>
@@ -239,7 +237,6 @@ export default function OfficeClient({
           </div>
         )}
 
-        
         <div className={styles.footer}>
           <button className={styles.logoutButton} onClick={handleLogOut}>
             <LogoutIcon />
@@ -250,7 +247,6 @@ export default function OfficeClient({
     </Container>
   );
 }
-
 
 const ArrowIcon = () => (
   <svg

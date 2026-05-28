@@ -52,7 +52,7 @@ export const candidates = pgTable('candidates', {
   name: text('name').notNull(),
   role: text('role').notNull(),
   description: text('description').notNull(),
-  imageUrl: text('image_url').default('/images/default.png').notNull(),
+  imageUrl: text('image_url').default('/images/default.webp').notNull(),
   link: text('link').default('https://google.com').notNull(),
   personalLink: text('personal_link').notNull().default('https://google.com'),
 });
@@ -166,9 +166,9 @@ export const documents = pgTable('documents', {
 
 export const updates = pgTable('updates', {
   id: uuid('id').primaryKey().defaultRandom(),
-  actionType: text('action_type').notNull(), 
+  actionType: text('action_type').notNull(),
   authorName: text('author_name').notNull(),
-  targetName: text('target_name'), 
+  targetName: text('target_name'),
   entityTitle: text('entity_title'),
   isViewed: boolean('is_viewed').default(false).notNull(),
   createdAt: timestamp('created_at').defaultNow().notNull(),

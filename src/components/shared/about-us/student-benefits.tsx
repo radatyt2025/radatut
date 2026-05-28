@@ -36,12 +36,12 @@ export const StudentBenefits: React.FC = () => {
 
         <div className={styles.imagesContainer}>
           <img
-            src="/images/about-us/student-benefit-1.png"
+            src="/images/about-us/student-benefit-1.webp"
             alt="Студентська рада 1"
             className={styles.imageSmall}
           />
           <img
-            src="/images/about-us/student-benefit-2.png"
+            src="/images/about-us/student-benefit-2.webp"
             alt="Студентська рада 2"
             className={styles.imageLarge}
           />

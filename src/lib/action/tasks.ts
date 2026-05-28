@@ -137,3 +137,27 @@ export async function deleteTask(taskId: string) {
     return { success: false, message: 'Помилка видалення задачі' };
   }
 }
+
+export async function uploadTaskAttachment(taskId: string, file: File) {
+  try {
+    const arrayBuffer = await file.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+
+    const sanitizedFilename = file.name.replace(/\s+/g, '-');
+    const uniqueFilename = `tasks/${taskId}/${Date.now()}-${sanitizedFilename}`;
+
+    const bucket = storage.bucket(BUCKET_NAME);
+    const blob = bucket.file(uniqueFilename);
+
+    await blob.save(buffer, { contentType: file.type });
+    const fileUrl = `https://storage.googleapis.com/${BUCKET_NAME}/${uniqueFilename}`;
+
+    await db.update(tasks).set({ attachmentUrl: fileUrl }).where(eq(tasks.id, taskId));
+
+    revalidatePath('/tasks');
+    return { success: true, url: fileUrl };
+  } catch (error) {
+    console.error('Upload Attachment Error:', error);
+    return { success: false, message: 'Помилка при завантаженні файлу' };
+  }
+}

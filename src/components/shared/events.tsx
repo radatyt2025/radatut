@@ -42,7 +42,7 @@ export const Events: React.FC = async () => {
           <Carousel opts={{ align: 'start' }} className="w-full">
             <CarouselContent>
               {events
-                .filter((event) => event.type === 'INTERNAL') // Показуємо всі INTERNAL
+                .filter((event) => event.type === 'INTERNAL')
                 .map((event) => {
                   const eventDate = parseDate(event.date);
                   const isUpcoming = eventDate >= now;
@@ -67,7 +67,6 @@ export const Events: React.FC = async () => {
                             </p>
                           </div>
                           
-                          {/* Кнопка відображається лише для майбутніх подій, у яких є посилання */}
                           {event.link && isUpcoming && (
                             <Button className={styles.registerButton} asChild>
                               <a target="_blank" rel="noreferrer" href={event.link}>

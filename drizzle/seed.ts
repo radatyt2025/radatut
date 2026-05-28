@@ -18,7 +18,7 @@ async function main() {
       instagramLink: 'markiyankostur',
       telegramLink: 'markiyankostur',
       imageUrl:
-        'https://storage.googleapis.com/radatut-test-bucket/team-members/8ff3f3c2693f362ba10ddc5b7fefbeedc6148cdf.png',
+        'https://storage.googleapis.com/radatut-test-bucket/team-members/8ff3f3c2693f362ba10ddc5b7fefbeedc6148cdf.webp',
       provider: 'credentials',
     },
   ]);

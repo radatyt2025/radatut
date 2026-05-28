@@ -423,3 +423,67 @@
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+.attachmentArea {
+  margin: 16px 0;
+  padding: 12px;
+  background: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.uploadRow {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.fileInput {
+  font-size: 12px;
+}
+
+.fileWrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: #ffffff;
+  border: 1px solid #d1dbff;
+  border-radius: 10px;
+  height: 44px;
+  padding: 0 16px;
+  flex: 1;
+  max-width: 300px;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.fileWrapper:focus-within,
+.fileWrapper:hover {
+  border-color: #002aff;
+}
+
+.customFileBtn {
+  background-color: #e4ecf7;
+  color: #002aff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  pointer-events: none;
+  font-family: inherit;
+  flex-shrink: 0;
+}
+
+.fileName {
+  font-size: 0.95rem;
+  color: #666;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  pointer-events: none;
+  flex: 1;
+  min-width: 0; 
+}

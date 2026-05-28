@@ -11,8 +11,10 @@ import {
   updateTaskStatus,
   addTaskComment,
   deleteTask,
+  uploadTaskAttachment,
 } from '@/lib/action/tasks';
 
+import { Button } from '../ui/button';
 import { Container } from './container';
 
 export type CommentModel = {
@@ -49,6 +51,7 @@ export default function TasksClient({ initialTasks, users }: TasksClientProps) {
   const { data: session } = useSession();
   const isAdmin = session?.user?.role === 'ADMIN';
   const currentUserFullName = session?.user?.fullName || 'Анонім';
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   const [activeTab, setActiveTab] = useState<
     'ALL' | 'NEW' | 'IN_PROGRESS' | 'COMPLETED'
@@ -73,6 +76,19 @@ export default function TasksClient({ initialTasks, users }: TasksClientProps) {
     NEW: initialTasks.filter((t) => t.status === 'NEW').length,
     IN_PROGRESS: initialTasks.filter((t) => t.status === 'IN_PROGRESS').length,
     COMPLETED: initialTasks.filter((t) => t.status === 'COMPLETED').length,
+  };
+
+  const handleFileUpload = (taskId: string) => {
+    if (!selectedFile) return;
+    startTransition(async () => {
+      const res = await uploadTaskAttachment(taskId, selectedFile);
+      if (res.success) {
+        toast.success('Файл успішно додано!');
+        setSelectedFile(null);
+      } else {
+        toast.error(res.message);
+      }
+    });
   };
 
   const toggleExpand = (id: string) => {
@@ -281,15 +297,52 @@ export default function TasksClient({ initialTasks, users }: TasksClientProps) {
                         {task.description}
                       </p>
                     )}
-                    {task.attachmentUrl && (
-                      <a
-                        href={task.attachmentUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        className={styles.attachmentLink}>
-                        <PaperclipIcon /> Переглянути файл
-                      </a>
-                    )}
+
+                    <div className={styles.attachmentArea}>
+                      {task.attachmentUrl ? (
+                        <a
+                          href={task.attachmentUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className={styles.attachmentLink}>
+                          <PaperclipIcon /> Переглянути файл
+                        </a>
+                      ) : (
+                        <p className={styles.noComments}>Файл не прикріплено</p>
+                      )}
+
+                      {canEditStatus && (
+                        <div className={styles.uploadRow}>
+                          <label className={styles.fileWrapper}>
+                            <input
+                              type="file"
+                              style={{ display: 'none' }}
+                              onChange={(e) =>
+                                setSelectedFile(e.target.files?.[0] || null)
+                              }
+                              disabled={isPending}
+                            />
+                            <span className={styles.customFileBtn}>
+                              Оберіть файл
+                            </span>
+                            <span className={styles.fileName}>
+                              {selectedFile
+                                ? selectedFile.name
+                                : 'Файл не обрано'}
+                            </span>
+                          </label>
+
+                          {selectedFile && (
+                            <Button
+                              className={styles.commentBtn}
+                              onClick={() => handleFileUpload(task.id)}
+                              disabled={isPending}>
+                              Завантажити
+                            </Button>
+                          )}
+                        </div>
+                      )}
+                    </div>
 
                     <div className={styles.commentsSection}>
                       <h4 className={styles.commentsTitle}>Коментарі</h4>
